@@ -1,57 +1,49 @@
 import React from 'react';
-import useFetch from 'react-fetch-hook';
+
+import { useGetUSData } from 'hooks/useGetUSData';
+import { useGetUSDailyData } from 'hooks/useGetUSDailyData';
+
 import { Navigation } from 'components/Navigation';
 import { PageHeader } from 'components/PageHeader';
+
 import { Card } from 'components/Card';
-import { CardStat } from 'components/CardStat';
+import { CardStatTotal } from 'components/CardStatTotal';
+import { CardStatGrowth } from 'components/CardStatGrowth';
+import { CardStatGeneric } from 'components/CardStatGeneric';
+
 import { LineChart } from 'components/LineChart';
 
 const App = () => {
-  const { isLoading: isLoadingUS, data: usData } = useFetch(
-    'https://covidtracking.com/api/us'
-  );
+  const { isLoading: isLoadingTotal, data: usData } = useGetUSData();
+  const { isLoading: isLoadingDaily, data: usDailyData } = useGetUSDailyData();
 
-  const currentData = usData ? usData[0] : {};
-  console.log(currentData);
+  console.log('current:', usData);
+  console.log('daily:', usDailyData);
+
   return (
     <div className="min-h-screen bg-gray-100">
       <Navigation />
       <div className="py-10">
-        <PageHeader>United States</PageHeader>
+        <PageHeader>US Covid-19</PageHeader>
         <main>
           <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div className="flex px-4 py-8 sm:px-0">
-              <div className="w-1/4">
-                <CardStat
-                  title="Total Cases"
-                  number={currentData.total}
-                  isLoading={isLoadingUS}
-                />
+              <div className="w-1/3">
+                <CardStatTotal data={usData} isLoading={isLoadingTotal} />
               </div>
-              <div className="w-1/4">
-                <CardStat
-                  title="Tested Positive"
-                  number={currentData.positive}
-                  isLoading={isLoadingUS}
-                />
+              <div className="w-1/3">
+                <CardStatGrowth data={usDailyData} isLoading={isLoadingDaily} />
               </div>
-              <div className="w-1/4">
-                <CardStat
-                  title="Growth Rate"
-                  number={currentData.total}
-                  isLoading={isLoadingUS}
-                />
-              </div>
-              <div className="w-1/4">
-                <CardStat
+              <div className="w-1/3">
+                <CardStatGeneric
                   title="Deceased"
-                  number={currentData.death}
-                  isLoading={isLoadingUS}
+                  number={usData.death}
+                  isLoading={isLoadingTotal}
                 />
               </div>
             </div>
             <Card>
-              <LineChart />
+              <LineChart data={usDailyData} />
             </Card>
           </div>
         </main>

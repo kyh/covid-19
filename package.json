@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "d3": "^5.15.0",
+    "date-fns": "^2.11.0",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-fetch-hook": "^1.8.2",

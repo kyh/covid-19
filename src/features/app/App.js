@@ -23,31 +23,28 @@ const App = () => {
   return (
     <div className="min-h-screen bg-gray-100">
       <Navigation />
-      <div className="py-10">
-        <PageHeader>US Covid-19</PageHeader>
-        <main>
-          <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div className="flex px-4 py-8 sm:px-0">
-              <div className="w-1/3">
-                <CardStatTotal data={usData} isLoading={isLoadingTotal} />
-              </div>
-              <div className="w-1/3">
-                <CardStatGrowth data={usDailyData} isLoading={isLoadingDaily} />
-              </div>
-              <div className="w-1/3">
-                <CardStatGeneric
-                  title="Deceased"
-                  number={usData.death}
-                  isLoading={isLoadingTotal}
-                />
-              </div>
+      <main className="py-10">
+        <div className="max-w-6xl mx-auto sm:px-6 lg:px-8">
+          <div className="flex px-4 pb-8 sm:px-0">
+            <div className="w-1/3">
+              <CardStatTotal data={usData} isLoading={isLoadingTotal} />
             </div>
-            <Card>
-              <LineChart data={usDailyData} />
-            </Card>
+            <div className="w-1/3">
+              <CardStatGrowth data={usDailyData} isLoading={isLoadingDaily} />
+            </div>
+            <div className="w-1/3">
+              <CardStatGeneric
+                title="Deceased"
+                number={usData.death}
+                isLoading={isLoadingTotal}
+              />
+            </div>
           </div>
-        </main>
-      </div>
+          <Card>
+            <LineChart data={usDailyData} />
+          </Card>
+        </div>
+      </main>
     </div>
   );
 };

@@ -55,12 +55,10 @@ export const LineChart = ({ data = [] }) => {
               .text(data.y)
           );
 
-      const callout = (g, positive) => {
-        if (!positive) return g.style('display', 'none');
-
+      const callout = (g, value) => {
         g.style('display', null)
           .style('pointer-events', 'none')
-          .style('font', '10px sans-serif');
+          .style('font-size', '10px');
 
         const path = g
           .selectAll('path')
@@ -76,7 +74,7 @@ export const LineChart = ({ data = [] }) => {
           .call(text =>
             text
               .selectAll('tspan')
-              .data((positive + '').split(/\n/))
+              .data((value + '').split(/\n/))
               .join('tspan')
               .attr('x', 0)
               .attr('y', (_, i) => `${i * 1.1}em`)
@@ -90,19 +88,17 @@ export const LineChart = ({ data = [] }) => {
         path.attr('d', `M${-w / 2 - 10},5H${w / 2 + 10}v${h + 20}h-${w + 20}z`);
       };
 
-      const d3bisect = () => {
-        const bisect = bisector(d => d.date).left;
-        return mx => {
-          const date = x.invert(mx);
-          const index = bisect(data, date, 1);
-          const a = data[index - 1];
-          const b = data[index];
-          if (a && b) {
-            return date - a.date > b.date - date ? b : a;
-          } else {
-            return {};
-          }
-        };
+      const bisect = bisector(d => d.date).left;
+      const onMouseEvent = mx => {
+        const date = x.invert(mx);
+        const index = bisect(data, date, 1);
+        const a = data[index - 1];
+        const b = data[index];
+        if (a && b) {
+          return date - a.date > b.date - date ? b : a;
+        } else {
+          return {};
+        }
       };
 
       const d3line = line()
@@ -119,6 +115,7 @@ export const LineChart = ({ data = [] }) => {
       svg.append('g').call(yAxis);
       svg
         .append('path')
+        .classed('growth-line', true)
         .datum(data)
         .attr('fill', 'none')
         .attr('stroke', 'steelblue')
@@ -127,19 +124,40 @@ export const LineChart = ({ data = [] }) => {
         .attr('stroke-linecap', 'round')
         .attr('d', d3line);
 
-      const tooltip = svg.append('g');
+      const point = svg
+        .append('circle')
+        .classed('cursor-point', true)
+        .attr('r', 3);
+      const cursorLine = svg
+        .append('line')
+        .classed('cursor-line', true)
+        .attr('stroke', 'black');
+      const tooltip = svg.append('g').classed('cursor-tooltip', true);
 
       svg.on('touchmove mousemove', function() {
-        const b = d3bisect();
-        const { date, positive } = b(mouse(this)[0]);
+        const { date, positive } = onMouseEvent(mouse(this)[0]);
         if (date && positive) {
           tooltip
-            .attr('transform', `translate(${x(date)},${y(positive)})`)
+            .attr('transform', `translate(${x(date)},${0})`)
             .call(callout, `${format(date, 'MM/dd')} - ${positive}`);
+          cursorLine
+            .style('display', null)
+            .attr('y1', 0)
+            .attr('x1', x(date))
+            .attr('y2', height - margin.bottom)
+            .attr('x2', x(date));
+          point
+            .style('display', null)
+            .attr('cx', x(date))
+            .attr('cy', y(positive));
         }
       });
 
-      svg.on('touchend mouseleave', () => tooltip.call(callout, null));
+      svg.on('touchend mouseleave', () => {
+        tooltip.style('display', 'none');
+        point.style('display', 'none');
+        cursorLine.style('display', 'none');
+      });
     }
   }, [data.length]);
 

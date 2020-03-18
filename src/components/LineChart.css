@@ -1,0 +1,13 @@
+.chart .xAxis path,
+line {
+  stroke: #a0aec0;
+}
+
+.chart .yAxis path,
+line {
+  stroke: #a0aec0;
+}
+
+.chart circle {
+  fill: #a0aec0;
+}

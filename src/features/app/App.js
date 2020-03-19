@@ -2,6 +2,7 @@ import React from 'react';
 
 import { useGetUSData } from 'hooks/useGetUSData';
 import { useGetUSDailyData } from 'hooks/useGetUSDailyData';
+import { useGetStatesDailyData } from 'hooks/useGetStatesDailyData';
 
 import { Navigation } from 'components/Navigation';
 
@@ -14,9 +15,14 @@ import { LineChart } from 'components/LineChart';
 const App = () => {
   const { isLoading: isLoadingTotal, data: usData } = useGetUSData();
   const { isLoading: isLoadingDaily, data: usDailyData } = useGetUSDailyData();
-
+  const {
+    isLoading: isLoadingStates,
+    data: statesDailyData,
+    states
+  } = useGetStatesDailyData();
   console.log('current:', usData);
   console.log('daily:', usDailyData);
+  console.log('states:', statesDailyData);
 
   return (
     <div className="min-h-screen">
@@ -35,6 +41,28 @@ const App = () => {
                 <StatGrowth data={usDailyData} isLoading={isLoadingDaily} />
               </Card>
             </div>
+          </div>
+          <div className="grid grid-cols-3 gap-4">
+            {states.map(state => {
+              return (
+                <Card key={state}>
+                  <h4 className="text-lg font-semibold leading-none">
+                    {state}
+                  </h4>
+                  <LineChart
+                    data={statesDailyData[state]}
+                    options={{
+                      height: 100,
+                      yAxis: false,
+                      margin: {
+                        left: 0,
+                        right: 0
+                      }
+                    }}
+                  />
+                </Card>
+              );
+            })}
           </div>
         </div>
       </main>

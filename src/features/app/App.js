@@ -43,7 +43,7 @@ const App = () => {
               </Card>
             </div>
           </div>
-          <h2 className="text-lg font-semibold leading-none">By State</h2>
+          <h2 className="text-lg font-semibold leading-none mb-4">By State</h2>
           <div className="grid grid-cols-3 gap-4">
             {states.map(state => {
               const data = statesDailyData[state];

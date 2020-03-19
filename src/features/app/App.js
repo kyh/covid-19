@@ -20,6 +20,7 @@ const App = () => {
     data: statesDailyData,
     states
   } = useGetStatesDailyData();
+
   console.log('current:', usData);
   console.log('daily:', usDailyData);
   console.log('states:', statesDailyData);
@@ -42,19 +43,28 @@ const App = () => {
               </Card>
             </div>
           </div>
+          <h2 className="text-lg font-semibold leading-none">By State</h2>
           <div className="grid grid-cols-3 gap-4">
             {states.map(state => {
+              const data = statesDailyData[state];
               return (
                 <Card key={state}>
-                  <h4 className="text-lg font-semibold leading-none">
-                    {state}
-                  </h4>
+                  <div className="flex justify-between items-center mb-2">
+                    <h4 className="text-lg font-semibold leading-none">
+                      {state}
+                    </h4>
+                    <span className="text-sm text-red-500">
+                      {data[0].positive} cases
+                    </span>
+                  </div>
                   <LineChart
-                    data={statesDailyData[state]}
+                    data={data}
                     options={{
                       height: 100,
                       yAxis: false,
                       margin: {
+                        top: 0,
+                        bottom: 20,
                         left: 0,
                         right: 0
                       }

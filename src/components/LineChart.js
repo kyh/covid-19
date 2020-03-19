@@ -29,9 +29,9 @@ export const LineChart = ({ data = [], options = defaultOptions }) => {
     // set the dimensions and margins of the graph
     const margin = {
       top: 20,
-      right: 30,
+      right: 0,
       bottom: 30,
-      left: 40,
+      left: 30,
       ...mergedOptions.margin
     };
     const width = mergedOptions.width || container.current.offsetWidth;

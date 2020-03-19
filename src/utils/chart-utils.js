@@ -4,6 +4,7 @@ import {
   scaleLinear,
   max,
   scaleTime,
+  timeParse,
   extent,
   axisBottom,
   axisLeft,
@@ -14,7 +15,7 @@ export const createScales = (data, width, height, margin = {}) => {
   const x = scaleTime()
     .domain(extent(data, d => d.date))
     .nice()
-    .range([margin.left, width - margin.right]);
+    .rangeRound([margin.left, width - margin.right]);
 
   const y = scaleLinear()
     .domain([0, max(data, d => d.positive)])
@@ -31,7 +32,7 @@ export const createAxis = (data, width, height, margin = {}, x, y) => {
       .classed('x-axis', true)
       .call(
         axisBottom(x)
-          .ticks(width / 80)
+          .tickArguments([width / 80, timeParse('%m/%d')])
           .tickSizeOuter(0)
       );
 
@@ -40,16 +41,7 @@ export const createAxis = (data, width, height, margin = {}, x, y) => {
       .attr('transform', `translate(${margin.left},0)`)
       .classed('y-axis', true)
       .call(axisLeft(y).tickSize(-width))
-      .call(g => g.select('.domain').remove())
-      .call(g =>
-        g
-          .select('.tick:last-of-type text')
-          .clone()
-          .attr('x', 3)
-          .attr('text-anchor', 'start')
-          .attr('font-weight', 'bold')
-          .text(data.y)
-      );
+      .call(g => g.select('.domain').remove());
 
   return { xAxis, yAxis };
 };

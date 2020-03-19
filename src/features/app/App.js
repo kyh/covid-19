@@ -28,7 +28,7 @@ const App = () => {
               <div className="mb-2">
                 <StatTotal data={usData} isLoading={isLoadingTotal} />
               </div>
-              <LineChart data={usDailyData} options={{ height: 300 }} />
+              <LineChart data={usDailyData} />
             </div>
             <div className="w-1/4">
               <Card>

@@ -12,15 +12,22 @@ import {
   axisLeft,
   mouse
 } from 'd3';
+import './LineChart.css';
 
-export const LineChart = ({ data = [] }) => {
+export const LineChart = ({ data = [], options = { margin: {} } }) => {
   const container = createRef();
 
   useEffect(() => {
     // set the dimensions and margins of the graph
-    const margin = { top: 20, right: 30, bottom: 30, left: 40 };
-    const width = container.current.offsetWidth;
-    const height = 400;
+    const margin = {
+      top: 20,
+      right: 30,
+      bottom: 30,
+      left: 40,
+      ...options.margin
+    };
+    const width = options.width || container.current.offsetWidth;
+    const height = options.height || 400;
 
     if (data.length) {
       const x = scaleTime()
@@ -34,16 +41,20 @@ export const LineChart = ({ data = [] }) => {
         .range([height - margin.bottom, margin.top]);
 
       const xAxis = g =>
-        g.attr('transform', `translate(0,${height - margin.bottom})`).call(
-          axisBottom(x)
-            .ticks(width / 80)
-            .tickSizeOuter(0)
-        );
+        g
+          .attr('transform', `translate(0,${height - margin.bottom})`)
+          .classed('x-axis', true)
+          .call(
+            axisBottom(x)
+              .ticks(width / 80)
+              .tickSizeOuter(0)
+          );
 
       const yAxis = g =>
         g
           .attr('transform', `translate(${margin.left},0)`)
-          .call(axisLeft(y))
+          .classed('y-axis', true)
+          .call(axisLeft(y).tickSize(-width))
           .call(g => g.select('.domain').remove())
           .call(g =>
             g
@@ -78,7 +89,6 @@ export const LineChart = ({ data = [] }) => {
               .join('tspan')
               .attr('x', 0)
               .attr('y', (_, i) => `${i * 1.1}em`)
-              .style('font-weight', (_, i) => (i ? null : 'bold'))
               .text(d => d)
           );
 
@@ -108,6 +118,7 @@ export const LineChart = ({ data = [] }) => {
 
       const svg = select(container.current)
         .append('svg')
+        .classed('chart', true)
         .attr('width', width)
         .attr('height', height);
 
@@ -118,7 +129,6 @@ export const LineChart = ({ data = [] }) => {
         .classed('growth-line', true)
         .datum(data)
         .attr('fill', 'none')
-        .attr('stroke', 'steelblue')
         .attr('stroke-width', 1.5)
         .attr('stroke-linejoin', 'round')
         .attr('stroke-linecap', 'round')
@@ -126,10 +136,12 @@ export const LineChart = ({ data = [] }) => {
 
       const point = svg
         .append('circle')
+        .style('display', 'none')
         .classed('cursor-point', true)
         .attr('r', 3);
       const cursorLine = svg
         .append('line')
+        .style('display', 'none')
         .classed('cursor-line', true)
         .attr('stroke', 'black');
       const tooltip = svg.append('g').classed('cursor-tooltip', true);

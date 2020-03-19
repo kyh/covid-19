@@ -4,12 +4,10 @@ import { useGetUSData } from 'hooks/useGetUSData';
 import { useGetUSDailyData } from 'hooks/useGetUSDailyData';
 
 import { Navigation } from 'components/Navigation';
-import { PageHeader } from 'components/PageHeader';
 
 import { Card } from 'components/Card';
-import { CardStatTotal } from 'components/CardStatTotal';
-import { CardStatGrowth } from 'components/CardStatGrowth';
-import { CardStatGeneric } from 'components/CardStatGeneric';
+import { StatTotal } from 'components/StatTotal';
+import { StatGrowth } from 'components/StatGrowth';
 
 import { LineChart } from 'components/LineChart';
 
@@ -21,28 +19,23 @@ const App = () => {
   console.log('daily:', usDailyData);
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen">
       <Navigation />
-      <main className="py-10">
-        <div className="max-w-6xl mx-auto sm:px-6 lg:px-8">
+      <main className="py-8">
+        <div className="max-w-5xl mx-auto sm:px-6 lg:px-8">
           <div className="flex px-4 pb-8 sm:px-0">
-            <div className="w-1/3">
-              <CardStatTotal data={usData} isLoading={isLoadingTotal} />
+            <div className="w-3/4 pr-10">
+              <div className="mb-2">
+                <StatTotal data={usData} isLoading={isLoadingTotal} />
+              </div>
+              <LineChart data={usDailyData} options={{ height: 300 }} />
             </div>
-            <div className="w-1/3">
-              <CardStatGrowth data={usDailyData} isLoading={isLoadingDaily} />
-            </div>
-            <div className="w-1/3">
-              <CardStatGeneric
-                title="Deceased"
-                number={usData.death}
-                isLoading={isLoadingTotal}
-              />
+            <div className="w-1/4">
+              <Card>
+                <StatGrowth data={usDailyData} isLoading={isLoadingDaily} />
+              </Card>
             </div>
           </div>
-          <Card>
-            <LineChart data={usDailyData} />
-          </Card>
         </div>
       </main>
     </div>

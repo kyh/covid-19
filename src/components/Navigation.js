@@ -4,7 +4,7 @@ export const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   return (
     <nav className="bg-white shadow-sm">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex">
             <div className="flex-shrink-0 flex items-center">
@@ -69,19 +69,7 @@ export const Navigation = () => {
                       href="#"
                       className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
                     >
-                      Your Profile
-                    </a>
-                    <a
-                      href="#"
-                      className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
-                    >
-                      Settings
-                    </a>
-                    <a
-                      href="#"
-                      className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
-                    >
-                      Sign out
+                      Notifications
                     </a>
                   </div>
                 </div>

@@ -1,13 +1,24 @@
-.chart .xAxis path,
-line {
-  stroke: #a0aec0;
+.chart .x-axis .domain,
+.chart .x-axis line {
+  stroke: none;
+  fill: none;
 }
 
-.chart .yAxis path,
-line {
-  stroke: #a0aec0;
+.chart .y-axis line {
+  stroke: #e2e8f0;
+  stroke-dasharray: 2, 2;
 }
 
-.chart circle {
+.chart .growth-line {
+  stroke: #f56565;
+}
+
+.chart .cursor-line {
+  stroke: #a0aec0;
+  stroke-dasharray: 2, 2;
+}
+
+.chart .cursor-point {
   fill: #a0aec0;
+  stroke: #fff;
 }

@@ -7,3 +7,8 @@ export const formatDaily = data => {
     date: parse(dateString, 'yyyyMMdd', new Date())
   };
 };
+
+export const numberWithCommas = x => {
+  if (!x) return '';
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+};

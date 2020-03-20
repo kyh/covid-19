@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { useGetUSDailyData } from 'hooks/useGetUSDailyData';
 import { useGetStatesDailyData } from 'hooks/useGetStatesDailyData';
@@ -19,8 +19,15 @@ const App = () => {
   } = useGetStatesDailyData();
 
   const [selectedState, setSelectedState] = useState(null);
+  const [filtered, setFiltered] = useState([...states]);
 
-  const selectState = state => {
+  useEffect(() => {
+    if (states.length) {
+      setFiltered([...states]);
+    }
+  }, [states.length]);
+
+  const onSelectState = state => {
     if (selectedState === state) {
       setSelectedState(null);
     } else {
@@ -31,6 +38,17 @@ const App = () => {
       left: 0,
       behavior: 'smooth'
     });
+  };
+
+  const onSearchState = event => {
+    const value = event.target.value;
+    if (!value) {
+      setFiltered([...states]);
+    } else {
+      setFiltered(
+        states.filter(s => s.toLowerCase().includes(value.toLowerCase()))
+      );
+    }
   };
 
   return (
@@ -59,21 +77,29 @@ const App = () => {
             </div>
           </div>
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-lg font-semibold leading-none">
-              By State
-            </h2>
-            <Input label="search" placeholder="search" />
+            <h2 className="text-lg font-semibold leading-none">By State</h2>
+            <Input
+              label="search"
+              placeholder="search"
+              list="states"
+              onChange={onSearchState}
+            />
+            <datalist id="states">
+              {states.map(s => (
+                <option>{s}</option>
+              ))}
+            </datalist>
           </div>
           <div className="grid grid-cols-3 gap-4">
             {isLoadingStates
               ? null
-              : states.map(state => {
+              : filtered.map(state => {
                   const data = statesDailyData[state];
                   return (
                     <button
                       type="button"
                       key={state}
-                      onClick={() => selectState(state)}
+                      onClick={() => onSelectState(state)}
                     >
                       <Card selected={selectedState === state}>
                         <div className="flex justify-between items-center mb-2">
@@ -81,7 +107,7 @@ const App = () => {
                             {state}
                           </h4>
                           <span className="text-sm text-red-500">
-                            {data[0].positive} cases
+                            {data[data.length - 1].positive} cases
                           </span>
                         </div>
                         <LineChart

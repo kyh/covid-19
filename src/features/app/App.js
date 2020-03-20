@@ -23,9 +23,13 @@ const App = () => {
 
   const [selectedState, setSelectedState] = useState(null);
 
-  // console.log('current:', usData);
-  // console.log('daily:', usDailyData);
-  // console.log('states:', statesDailyData);
+  const selectState = state => {
+    if (selectedState === state) {
+      setSelectedState(null);
+    } else {
+      setSelectedState(state);
+    }
+  };
 
   return (
     <div className="min-h-screen">
@@ -58,10 +62,9 @@ const App = () => {
                     <button
                       type="button"
                       key={state}
-                      onClick={() => setSelectedState(state)}
-                      disabled={selectedState === state}
+                      onClick={() => selectState(state)}
                     >
-                      <Card>
+                      <Card selected={selectedState === state}>
                         <div className="flex justify-between items-center mb-2">
                           <h4 className="text-lg font-semibold leading-none">
                             {state}

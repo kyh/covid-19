@@ -86,7 +86,7 @@ const App = () => {
             />
             <datalist id="states">
               {states.map(s => (
-                <option>{s}</option>
+                <option key={s}>{s}</option>
               ))}
             </datalist>
           </div>
@@ -97,6 +97,7 @@ const App = () => {
                   const data = statesDailyData[state];
                   return (
                     <button
+                      className="focus:outline-none focus:shadow-outline"
                       type="button"
                       key={state}
                       onClick={() => onSelectState(state)}

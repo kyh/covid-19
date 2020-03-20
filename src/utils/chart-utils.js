@@ -8,7 +8,8 @@ import {
   extent,
   axisBottom,
   axisLeft,
-  bisector
+  bisector,
+  select
 } from 'd3';
 
 export const createScales = (data, width, height, margin = {}) => {
@@ -25,25 +26,29 @@ export const createScales = (data, width, height, margin = {}) => {
   return { x, y };
 };
 
-export const createAxis = (data, width, height, margin = {}, x, y) => {
-  const xAxis = g =>
-    g
-      .attr('transform', `translate(0,${height - margin.bottom})`)
-      .classed('x-axis', true)
-      .call(
-        axisBottom(x)
-          .tickArguments([width / 80, timeParse('%m/%d')])
-          .tickSizeOuter(0)
-      );
+export const createAxis = (width, x, y) => {
+  const xAxis = axisBottom(x)
+    .tickArguments([width / 80, timeParse('%m/%d')])
+    .tickSizeOuter(0);
 
-  const yAxis = g =>
-    g
-      .attr('transform', `translate(${margin.left},0)`)
-      .classed('y-axis', true)
-      .call(axisLeft(y).tickSize(-width))
-      .call(g => g.select('.domain').remove());
+  const yAxis = axisLeft(y).tickSize(-width);
 
   return { xAxis, yAxis };
+};
+
+export const createLineFn = (x, y) => {
+  const d3Line = line()
+    .defined(d => !isNaN(d.positive))
+    .x(d => x(d.date))
+    .y(d => y(d.positive));
+
+  const d3Area = area()
+    .defined(d => !isNaN(d.positive))
+    .x(d => x(d.date))
+    .y0(y(0))
+    .y1(d => y(d.positive));
+
+  return { line: d3Line, area: d3Area };
 };
 
 export const createTooltipEvents = (data, x, y) => {
@@ -100,17 +105,62 @@ export const createTooltipEvents = (data, x, y) => {
   return { callout, onMouseEvent };
 };
 
-export const createLineFn = (x, y) => {
-  const d3Line = line()
-    .defined(d => !isNaN(d.positive))
-    .x(d => x(d.date))
-    .y(d => y(d.positive));
+export const appendSvg = (container, width, height) => {
+  const svg = select(container)
+    .append('svg')
+    .attr('class', 'chart')
+    .attr('width', width)
+    .attr('height', height);
 
-  const d3Area = area()
-    .defined(d => !isNaN(d.positive))
-    .x(d => x(d.date))
-    .y0(y(0))
-    .y1(d => y(d.positive));
+  return svg;
+};
 
-  return { line: d3Line, area: d3Area };
+export const appendDefs = svg => {
+  const defs = svg.append('defs');
+
+  const gradient = defs
+    .append('linearGradient')
+    .attr('id', 'svgGradient')
+    .attr('x1', '0%')
+    .attr('x2', '100%')
+    .attr('y1', '0%')
+    .attr('y2', '100%');
+
+  gradient
+    .append('stop')
+    .attr('class', 'start')
+    .attr('offset', '0%')
+    .attr('stop-color', '#f56565')
+    .attr('stop-opacity', 1);
+
+  gradient
+    .append('stop')
+    .attr('class', 'end')
+    .attr('offset', '80%')
+    .attr('stop-color', 'white')
+    .attr('stop-opacity', 1);
+
+  return defs;
+};
+
+export const appendTooltip = svg => {
+  let tooltip = svg.select('.cursor-tooltip');
+  let point = svg.select('.cursor-point');
+  let cursorLine = svg.select('.cursor-line');
+
+  if (tooltip.empty()) {
+    cursorLine = svg
+      .append('line')
+      .style('display', 'none')
+      .attr('class', 'cursor-line')
+      .attr('stroke', 'black');
+    point = svg
+      .append('circle')
+      .style('display', 'none')
+      .attr('class', 'cursor-point')
+      .attr('r', 3);
+    tooltip = svg.append('g').attr('class', 'cursor-tooltip');
+  }
+
+  return { tooltip, point, cursorLine };
 };

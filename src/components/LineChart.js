@@ -5,7 +5,10 @@ import {
   createScales,
   createAxis,
   createTooltipEvents,
-  createLineFn
+  createLineFn,
+  appendSvg,
+  appendDefs,
+  appendTooltip
 } from 'utils/chart-utils';
 import './LineChart.css';
 
@@ -39,75 +42,81 @@ export const LineChart = ({ data = [], options = defaultOptions }) => {
 
     if (data.length) {
       const { x, y } = createScales(data, width, height, margin);
-      const { xAxis, yAxis } = createAxis(data, width, height, margin, x, y);
+      const { xAxis, yAxis } = createAxis(width, x, y);
       const { line, area } = createLineFn(x, y);
+      let svg = select(container.current).select('.chart');
 
-      const svg = select(container.current)
-        .append('svg')
-        .classed('chart', true)
-        .attr('width', width)
-        .attr('height', height);
-
-      const defs = svg.append('defs');
-
-      const gradient = defs
-        .append('linearGradient')
-        .attr('id', 'svgGradient')
-        .attr('x1', '0%')
-        .attr('x2', '100%')
-        .attr('y1', '0%')
-        .attr('y2', '100%');
-
-      gradient
-        .append('stop')
-        .attr('class', 'start')
-        .attr('offset', '0%')
-        .attr('stop-color', '#f56565')
-        .attr('stop-opacity', 1);
-
-      gradient
-        .append('stop')
-        .attr('class', 'end')
-        .attr('offset', '80%')
-        .attr('stop-color', 'white')
-        .attr('stop-opacity', 1);
+      if (svg.empty()) {
+        svg = appendSvg(container.current, width, height);
+        appendDefs(svg);
+      }
 
       if (mergedOptions.xAxis) {
-        svg.append('g').call(xAxis);
+        const xAxisSvg = svg.selectAll('.x-axis');
+        if (xAxisSvg.empty()) {
+          svg
+            .append('g')
+            .attr('transform', `translate(0,${height - margin.bottom})`)
+            .attr('class', 'x-axis')
+            .call(xAxis);
+        } else {
+          xAxisSvg
+            .transition()
+            .duration(1500)
+            .call(xAxis);
+        }
       }
+
       if (mergedOptions.yAxis) {
-        svg.append('g').call(yAxis);
+        const yAxisSvg = svg.selectAll('.y-axis');
+        if (yAxisSvg.empty()) {
+          svg
+            .append('g')
+            .attr('transform', `translate(${margin.left},0)`)
+            .attr('class', 'y-axis')
+            .call(yAxis)
+            .call(g => g.select('.domain').remove());
+        } else {
+          yAxisSvg
+            .transition()
+            .duration(1500)
+            .call(yAxis)
+            .call(g => g.select('.domain').remove());
+        }
       }
-      svg
+
+      const valueArea = svg.selectAll('.growth-background').data([data]);
+      valueArea.exit().remove();
+      valueArea
+        .enter()
         .append('path')
-        .classed('growth-background', true)
-        .datum(data)
+        .attr('class', 'growth-background')
         .attr('fill', 'url(#svgGradient)')
+        .attr('d', area)
+        .merge(valueArea)
+        .transition()
+        .duration(1500)
         .attr('d', area);
-      svg
+
+      const valueLine = svg.selectAll('.growth-line').data([data]);
+      valueLine.exit().remove();
+      valueLine
+        .enter()
         .append('path')
-        .classed('growth-line', true)
-        .datum(data)
+        .attr('class', 'growth-line')
         .attr('fill', 'none')
         .attr('stroke-width', 1.5)
         .attr('stroke-linejoin', 'round')
         .attr('stroke-linecap', 'round')
+        .attr('d', line)
+        .merge(valueLine)
+        .transition()
+        .duration(1500)
         .attr('d', line);
-
-      const point = svg
-        .append('circle')
-        .style('display', 'none')
-        .classed('cursor-point', true)
-        .attr('r', 3);
-      const cursorLine = svg
-        .append('line')
-        .style('display', 'none')
-        .classed('cursor-line', true)
-        .attr('stroke', 'black');
 
       if (mergedOptions.tooltip) {
         const { onMouseEvent, callout } = createTooltipEvents(data, x, y);
-        const tooltip = svg.append('g').classed('cursor-tooltip', true);
+        const { tooltip, point, cursorLine } = appendTooltip(svg);
 
         svg.on('touchmove mousemove', function() {
           const { date, positive } = onMouseEvent(mouse(this)[0]);
@@ -135,7 +144,7 @@ export const LineChart = ({ data = [], options = defaultOptions }) => {
         });
       }
     }
-  }, [data.length]);
+  }, [data]);
 
   return <div ref={container} />;
 };

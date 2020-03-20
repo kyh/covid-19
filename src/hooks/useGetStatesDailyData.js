@@ -7,6 +7,7 @@ export const useGetStatesDailyData = () => {
   );
   const formatted = data
     .map(d => formatDaily(d))
+    .sort((a, b) => a.date - b.date)
     .reduce((acc, state) => {
       if (!acc[state.state]) {
         acc[state.state] = [state];

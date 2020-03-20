@@ -4,11 +4,10 @@ import { useGetUSDailyData } from 'hooks/useGetUSDailyData';
 import { useGetStatesDailyData } from 'hooks/useGetStatesDailyData';
 
 import { Navigation } from 'components/Navigation';
-
+import { Input } from 'components/Input';
 import { Card } from 'components/Card';
 import { StatTotal } from 'components/StatTotal';
 import { StatGrowth } from 'components/StatGrowth';
-
 import { LineChart } from 'components/LineChart';
 
 const App = () => {
@@ -59,7 +58,12 @@ const App = () => {
               </Card>
             </div>
           </div>
-          <h2 className="text-lg font-semibold leading-none mb-4">By State</h2>
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-lg font-semibold leading-none">
+              By State
+            </h2>
+            <Input label="search" placeholder="search" />
+          </div>
           <div className="grid grid-cols-3 gap-4">
             {isLoadingStates
               ? null

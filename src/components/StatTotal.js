@@ -10,7 +10,7 @@ export const StatTotal = ({
   return (
     <div>
       <div className="text-xs uppercase text-gray-600 mb-1 font-semibold">
-        {selectedState || 'US'} Total Cases
+        {selectedState || 'US'} Positive Cases
       </div>
       {!isLoading ? (
         <div className="flex justify-between">

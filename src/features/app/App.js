@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 
-import { useGetUSData } from 'hooks/useGetUSData';
 import { useGetUSDailyData } from 'hooks/useGetUSDailyData';
 import { useGetStatesDailyData } from 'hooks/useGetStatesDailyData';
 

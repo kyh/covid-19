@@ -3,7 +3,6 @@ import React from 'react';
 export const StatGrowth = ({ data = [], isLoading = false }) => {
   const today = data[data.length - 1];
   const yesterday = data[data.length - 2];
-  console.log(data);
   return (
     <div>
       <div className="text-xs uppercase text-gray-600 mb-1 font-semibold">

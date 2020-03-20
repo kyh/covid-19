@@ -13,7 +13,6 @@ import { StatGrowth } from 'components/StatGrowth';
 import { LineChart } from 'components/LineChart';
 
 const App = () => {
-  const { isLoading: isLoadingTotal, data: usData } = useGetUSData();
   const { isLoading: isLoadingDaily, data: usDailyData } = useGetUSDailyData();
   const {
     isLoading: isLoadingStates,
@@ -29,6 +28,11 @@ const App = () => {
     } else {
       setSelectedState(state);
     }
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
   };
 
   return (
@@ -39,7 +43,11 @@ const App = () => {
           <div className="flex px-4 pb-8 sm:px-0">
             <div className="w-3/4 pr-10">
               <div className="mb-2">
-                <StatTotal data={usData} isLoading={isLoadingTotal} />
+                <StatTotal
+                  data={statesDailyData[selectedState] || usDailyData}
+                  isLoading={isLoadingDaily}
+                  selectedState={selectedState}
+                />
               </div>
               <LineChart data={statesDailyData[selectedState] || usDailyData} />
             </div>

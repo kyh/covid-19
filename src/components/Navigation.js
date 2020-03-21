@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 
 export const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -7,18 +8,21 @@ export const Navigation = () => {
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex">
-            <a
-              href="#"
-              className="inline-flex items-center px-1 pt-1 border-b-2 border-indigo-500 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out"
+            <NavLink
+              to="/"
+              exact
+              activeClassName="border-indigo-500 text-gray-900 focus:outline-none focus:border-indigo-700 hover:border-indigo-500 hover:text-gray-900"
+              className="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500  hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out mr-8"
             >
-              National
-            </a>
-            <a
-              href="#"
-              className="ml-8 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out"
+              Dashboard
+            </NavLink>
+            <NavLink
+              to="/map"
+              activeClassName="border-indigo-500 text-gray-900 focus:outline-none focus:border-indigo-700 hover:border-indigo-500 hover:text-gray-900"
+              className="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out"
             >
-              International
-            </a>
+              Map
+            </NavLink>
           </div>
           <div className="ml-6 flex items-center">
             <div className="ml-3 relative">
@@ -45,12 +49,9 @@ export const Navigation = () => {
               {isMenuOpen && (
                 <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg">
                   <div className="py-1 rounded-md bg-white shadow-xs">
-                    <a
-                      href="#"
-                      className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
-                    >
+                    <div className="block px-4 py-2 text-sm leading-5 text-gray-700">
                       No new notifications
-                    </a>
+                    </div>
                   </div>
                 </div>
               )}

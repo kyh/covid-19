@@ -1,137 +1,25 @@
-import React, { useState, useEffect } from 'react';
-
-import { useGetUSDailyData } from 'hooks/useGetUSDailyData';
-import { useGetStatesDailyData } from 'hooks/useGetStatesDailyData';
+import React from 'react';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import { Navigation } from 'components/Navigation';
-import { Input } from 'components/Input';
-import { Card } from 'components/Card';
-import { StatTotal } from 'components/StatTotal';
-import { StatGrowth } from 'components/StatGrowth';
-import { LineChart } from 'components/LineChart';
+import { Dashboard } from 'features/dashboard/Dashboard';
 
 const App = () => {
-  const { isLoading: isLoadingDaily, data: usDailyData } = useGetUSDailyData();
-  const {
-    isLoading: isLoadingStates,
-    data: statesDailyData,
-    states
-  } = useGetStatesDailyData();
-
-  const [selectedState, setSelectedState] = useState(null);
-  const [filtered, setFiltered] = useState([...states]);
-
-  useEffect(() => {
-    if (states.length) {
-      setFiltered([...states]);
-    }
-  }, [states.length]);
-
-  const onSelectState = state => {
-    if (selectedState === state) {
-      setSelectedState(null);
-    } else {
-      setSelectedState(state);
-    }
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: 'smooth'
-    });
-  };
-
-  const onSearchState = event => {
-    const value = event.target.value;
-    if (!value) {
-      setFiltered([...states]);
-    } else {
-      setFiltered(
-        states.filter(s => s.toLowerCase().includes(value.toLowerCase()))
-      );
-    }
-  };
-
   return (
-    <div className="min-h-screen">
-      <Navigation />
-      <main className="py-8">
-        <div className="max-w-5xl mx-auto sm:px-6 lg:px-8">
-          <div className="flex px-4 pb-8 sm:px-0">
-            <div className="w-3/4 pr-10">
-              <div className="mb-2">
-                <StatTotal
-                  data={statesDailyData[selectedState] || usDailyData}
-                  isLoading={isLoadingDaily}
-                  selectedState={selectedState}
-                />
-              </div>
-              <LineChart data={statesDailyData[selectedState] || usDailyData} />
-            </div>
-            <div className="w-1/4">
-              <Card>
-                <StatGrowth
-                  data={statesDailyData[selectedState] || usDailyData}
-                  isLoading={isLoadingDaily}
-                />
-              </Card>
-            </div>
-          </div>
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-lg font-semibold leading-none">By State</h2>
-            <Input
-              label="search"
-              placeholder="search"
-              list="states"
-              onChange={onSearchState}
-            />
-            <datalist id="states">
-              {states.map(s => (
-                <option key={s}>{s}</option>
-              ))}
-            </datalist>
-          </div>
-          <div className="grid grid-cols-3 gap-4">
-            {isLoadingStates
-              ? null
-              : filtered.map(state => {
-                  const data = statesDailyData[state];
-                  return (
-                    <button
-                      className="focus:outline-none focus:shadow-outline"
-                      type="button"
-                      key={state}
-                      onClick={() => onSelectState(state)}
-                    >
-                      <Card selected={selectedState === state}>
-                        <div className="flex justify-between items-center mb-2">
-                          <h4 className="text-lg font-semibold leading-none">
-                            {state}
-                          </h4>
-                          <span className="text-sm text-red-500">
-                            {data[data.length - 1].positive} cases
-                          </span>
-                        </div>
-                        <LineChart
-                          data={data}
-                          options={{
-                            height: 100,
-                            yAxis: false,
-                            margin: {
-                              top: 0,
-                              bottom: 20,
-                              left: 0,
-                              right: 0
-                            }
-                          }}
-                        />
-                      </Card>
-                    </button>
-                  );
-                })}
-          </div>
-        </div>
-      </main>
-    </div>
+    <BrowserRouter>
+      <div className="min-h-screen">
+        <Navigation />
+        <main className="py-8">
+          <Switch>
+            <Route exact path="/">
+              <Dashboard />
+            </Route>
+            <Route path="/map">Map</Route>
+            <Route path="/about">About</Route>
+          </Switch>
+        </main>
+      </div>
+    </BrowserRouter>
   );
 };
 

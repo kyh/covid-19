@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import { Navigation } from 'components/Navigation';
+import { Footer } from 'components/Footer';
 import { DashboardPage } from 'features/dashboard/DashboardPage';
 import { MapPage } from 'features/map/MapPage';
 import { AboutPage } from 'features/about/AboutPage';
@@ -24,6 +25,7 @@ const App = () => {
             </Route>
           </Switch>
         </main>
+        <Footer />
       </div>
     </BrowserRouter>
   );

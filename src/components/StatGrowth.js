@@ -1,4 +1,5 @@
 import React from 'react';
+import ContentLoader from 'react-content-loader';
 import { growthRate } from 'utils/stats';
 import { Icon } from 'components/Icon';
 
@@ -18,7 +19,7 @@ export const StatGrowth = ({ data = [], isLoading = false }) => {
         Growth Rate
       </div>
       {!isLoading ? (
-        <div className="mb-3">
+        <div>
           <h2 className="text-2xl leading-none">
             {todayGrowth}
             <span className="text-gray-600 text-xs">%</span>
@@ -36,7 +37,12 @@ export const StatGrowth = ({ data = [], isLoading = false }) => {
             </span>
           </div>
         </div>
-      ) : null}
+      ) : (
+        <ContentLoader style={{ width: '100%', height: 44 }}>
+          <rect x="0" y="0" rx="4" ry="4" width="40%" height="24" />
+          <rect x="0" y="26" rx="4" ry="4" width="80%" height="18" />
+        </ContentLoader>
+      )}
     </div>
   );
 };

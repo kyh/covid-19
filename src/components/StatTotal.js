@@ -1,4 +1,5 @@
 import React from 'react';
+import ContentLoader from 'react-content-loader';
 import { numberWithCommas } from 'utils/formatter';
 
 export const StatTotal = ({
@@ -28,7 +29,13 @@ export const StatTotal = ({
             </p>
           </div>
         </div>
-      ) : null}
+      ) : (
+        <ContentLoader style={{ width: '100%', height: 42 }}>
+          <rect x="0" y="0" rx="4" ry="4" width="120" height="100%" />
+          <rect x="80%" y="0" rx="4" ry="4" width="20%" height="40%" />
+          <rect x="80%" y="50%" rx="4" ry="4" width="20%" height="40%" />
+        </ContentLoader>
+      )}
     </div>
   );
 };

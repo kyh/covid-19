@@ -1,4 +1,5 @@
 import React from 'react';
+import ContentLoader from 'react-content-loader';
 
 import { Card } from 'components/Card';
 import { StatTotal } from 'components/StatTotal';
@@ -23,7 +24,13 @@ export const Featured = ({
             isLoading={isLoading}
           />
         </div>
-        <LineChart data={dailyData} />
+        {dailyData.length ? (
+          <LineChart data={dailyData} />
+        ) : (
+          <ContentLoader style={{ width: '100%', height: '300px' }}>
+            <rect x="0" y="0" rx="4" ry="4" width="100%" height="100%" />
+          </ContentLoader>
+        )}
       </div>
       <div className="w-1/4">
         <Card>

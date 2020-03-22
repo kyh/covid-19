@@ -5,11 +5,11 @@
   "dependencies": {
     "d3": "^5.15.0",
     "date-fns": "^2.11.0",
-    "react": "^16.13.0",
-    "react-dom": "^16.13.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "react-fetch-hook": "^1.8.2",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "^3.4.0"
+    "react-scripts": "^3.4.1"
   },
   "scripts": {
     "start": "npm-run-all -p start:css start:js",

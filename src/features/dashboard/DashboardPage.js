@@ -3,10 +3,11 @@ import React, { useState, useEffect } from 'react';
 import { useGetUSDailyData } from 'hooks/useGetUSDailyData';
 import { useGetStatesDailyData } from 'hooks/useGetStatesDailyData';
 
+import { PageContainer } from 'components/PageContainer';
 import { Featured } from './Featured';
 import { States } from './States';
 
-export const Dashboard = () => {
+export const DashboardPage = () => {
   const { isLoading: isLoadingDaily, data: usDailyData } = useGetUSDailyData();
   const {
     isLoading: isLoadingStates,
@@ -48,7 +49,7 @@ export const Dashboard = () => {
   };
 
   return (
-    <div className="max-w-5xl mx-auto sm:px-6 lg:px-8">
+    <PageContainer>
       <Featured
         dailyData={statesDailyData[selectedState] || usDailyData}
         selectedState={selectedState}
@@ -63,6 +64,6 @@ export const Dashboard = () => {
         onSelectState={onSelectState}
         onSearchState={onSearchState}
       />
-    </div>
+    </PageContainer>
   );
 };

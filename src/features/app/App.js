@@ -2,7 +2,9 @@ import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import { Navigation } from 'components/Navigation';
-import { Dashboard } from 'features/dashboard/Dashboard';
+import { DashboardPage } from 'features/dashboard/DashboardPage';
+import { MapPage } from 'features/map/MapPage';
+import { AboutPage } from 'features/about/AboutPage';
 
 const App = () => {
   return (
@@ -12,10 +14,14 @@ const App = () => {
         <main className="py-8">
           <Switch>
             <Route exact path="/">
-              <Dashboard />
+              <DashboardPage />
             </Route>
-            <Route path="/map">Map</Route>
-            <Route path="/about">About</Route>
+            <Route path="/map">
+              <MapPage />
+            </Route>
+            <Route path="/about">
+              <AboutPage />
+            </Route>
           </Switch>
         </main>
       </div>

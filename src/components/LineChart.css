@@ -1,3 +1,7 @@
+.chart .domain {
+  display: none;
+}
+
 .chart .x-axis .domain,
 .chart .x-axis line {
   stroke: none;

@@ -18,7 +18,7 @@ const iconSizeMap = {
 
 export const Icon = ({
   icon = '',
-  className = 'fill-current text-gray-800',
+  color = 'text-gray-800',
   size = 'md',
   ...rest
 }) => {
@@ -31,7 +31,7 @@ export const Icon = ({
       viewBox="0 0 24 24"
       width={iconSize}
       height={iconSize}
-      className={className}
+      className={`fill-current ${color}`}
       {...rest}
     >
       {iconPath}

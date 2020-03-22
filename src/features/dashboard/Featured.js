@@ -3,6 +3,7 @@ import React from 'react';
 import { Card } from 'components/Card';
 import { StatTotal } from 'components/StatTotal';
 import { StatGrowth } from 'components/StatGrowth';
+import { StatMortality } from 'components/StatMortality';
 import { LineChart } from 'components/LineChart';
 
 export const Featured = ({ dailyData, selectedState, isLoading }) => {
@@ -20,7 +21,12 @@ export const Featured = ({ dailyData, selectedState, isLoading }) => {
       </div>
       <div className="w-1/4">
         <Card>
-          <StatGrowth data={dailyData} isLoading={isLoading} />
+          <div className="mb-5">
+            <StatGrowth data={dailyData} isLoading={isLoading} />
+          </div>
+          <div>
+            <StatMortality data={dailyData} isLoading={isLoading} />
+          </div>
         </Card>
       </div>
     </div>

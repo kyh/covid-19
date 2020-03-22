@@ -2,25 +2,24 @@ import React from 'react';
 import { growthRate } from 'utils/stats';
 import { Icon } from 'components/Icon';
 
-export const StatGrowth = ({ data = [], isLoading = false }) => {
+export const StatMortality = ({ data = [], isLoading = false }) => {
   const today = data[data.length - 1] || {};
   const yesterday = data[data.length - 2] || {};
-  const twoDaysAgo = data[data.length - 3] || {};
 
-  const todayGrowth = growthRate(yesterday.positive, today.positive);
-  const yesterdayGrowth = growthRate(twoDaysAgo.positive, yesterday.positive);
-  const difference = growthRate(yesterdayGrowth, todayGrowth);
+  const todayMortality = (today.death / today.positive) * 100;
+  const yesterdayMortality = (yesterday.death / yesterday.positive) * 100;
+  const difference = growthRate(yesterdayMortality, todayMortality);
   const positive = difference > 0;
 
   return (
     <div>
       <div className="text-xs uppercase text-gray-600 mb-1 font-semibold">
-        Growth Rate
+        Mortality Rate
       </div>
       {!isLoading ? (
         <div className="mb-3">
           <h2 className="text-2xl leading-none">
-            {todayGrowth}
+            {todayMortality.toFixed(2)}
             <span className="text-gray-600 text-xs">%</span>
           </h2>
           <div className="flex items-center text-xs">
@@ -32,7 +31,7 @@ export const StatGrowth = ({ data = [], isLoading = false }) => {
               />
             </div>
             <span className={positive ? 'text-red-500' : 'text-green-500'}>
-              ({positive ? 'up' : 'down'} from {yesterdayGrowth}%)
+              ({positive ? 'up' : 'down'} from {yesterdayMortality.toFixed(2)}%)
             </span>
           </div>
         </div>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import { useGetUSDailyData } from 'hooks/useGetUSDailyData';
 import { useGetStatesDailyData } from 'hooks/useGetStatesDailyData';
+import { useGetStatesInfo } from 'hooks/useGetStatesInfo';
 
 import { PageContainer } from 'components/PageContainer';
 import { Featured } from './Featured';
@@ -14,6 +15,7 @@ export const DashboardPage = () => {
     data: statesDailyData,
     states
   } = useGetStatesDailyData();
+  const { data: statesInfo } = useGetStatesInfo();
 
   const [selectedState, setSelectedState] = useState(null);
   const [filtered, setFiltered] = useState([...states]);
@@ -52,6 +54,7 @@ export const DashboardPage = () => {
     <PageContainer>
       <Featured
         dailyData={statesDailyData[selectedState] || usDailyData}
+        statesInfo={statesInfo}
         selectedState={selectedState}
         isLoading={isLoadingDaily}
       />

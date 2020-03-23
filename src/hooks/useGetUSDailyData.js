@@ -5,7 +5,10 @@ export const useGetUSDailyData = () => {
   const { isLoading, data = [] } = useFetch(
     'https://covidtracking.com/api/us/daily'
   );
-  const formatted = data.map(d => formatDaily(d));
+  let formatted = [];
+  if (Array.isArray(data)) {
+    formatted = data.map(d => formatDaily(d));
+  }
 
   return { isLoading, data: formatted };
 };

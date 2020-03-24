@@ -15,8 +15,8 @@ export const Featured = ({
   isLoading
 }) => {
   return (
-    <div className="flex px-4 pb-8 sm:px-0">
-      <div className="w-3/4 pr-10">
+    <div className="sm:flex pb-8 px-4 sm:px-0">
+      <div className="sm:w-3/4 sm:pr-10">
         <div className="mb-2">
           <StatTotal
             data={dailyData}
@@ -32,7 +32,7 @@ export const Featured = ({
           </ContentLoader>
         )}
       </div>
-      <div className="w-1/4">
+      <div className="sm:w-1/4">
         <Card>
           <div className="mb-5">
             <StatGrowth data={dailyData} isLoading={isLoading} />

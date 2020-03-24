@@ -15,7 +15,7 @@ export const States = ({
   onSearchState
 }) => {
   return (
-    <>
+    <div className="px-4 sm:px-0">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-lg font-semibold leading-none">By State</h2>
         <Input
@@ -37,7 +37,7 @@ export const States = ({
           <rect x="66%" y="0" rx="4" ry="4" width="30%" height="100%" />
         </ContentLoader>
       ) : (
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid sm:grid-cols-3 gap-4">
           {filtered.map(state => {
             const data = statesDailyData[state];
             return (
@@ -75,6 +75,6 @@ export const States = ({
           })}
         </div>
       )}
-    </>
+    </div>
   );
 };

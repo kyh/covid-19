@@ -11,6 +11,7 @@ import {
   event
 } from 'd3';
 import { stateIdToState } from 'utils/map-utils';
+import { appendSvg } from 'utils/chart-utils';
 import './Map.css';
 const topojson = require('topojson');
 
@@ -18,7 +19,7 @@ export const Map = ({ stateToData, totalPositives }) => {
   const container = createRef();
 
   useEffect(() => {
-    const svg = select(container.current);
+    const svg = appendSvg(container.current, 960, 600);
     const path = geoPath();
     const x = scaleLinear().domain([0, 10]).rangeRound([650, 910]);
 
@@ -99,5 +100,5 @@ export const Map = ({ stateToData, totalPositives }) => {
     }
   }, []);
 
-  return <svg className="map" width="960" height="600" ref={container} />;
+  return <div ref={container} />;
 };

@@ -4,7 +4,7 @@ import { useGetStatesData } from 'hooks/useGetStatesData';
 import { PageContainer } from 'components/PageContainer';
 import { Map } from 'components/Map';
 
-export const MapPage = () => {
+export const CurrentPage = () => {
   const { stateToData, totalPositives, isLoading } = useGetStatesData();
   return (
     <PageContainer>

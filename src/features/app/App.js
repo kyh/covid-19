@@ -3,8 +3,9 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import { Navigation } from 'components/Navigation';
 import { Footer } from 'components/Footer';
-import { DashboardPage } from 'features/dashboard/DashboardPage';
-import { MapPage } from 'features/map/MapPage';
+import { TrendPage } from 'features/trend/TrendPage';
+import { CurrentPage } from 'features/current/CurrentPage';
+import { ComparePage } from 'features/compare/ComparePage';
 import { AboutPage } from 'features/about/AboutPage';
 
 const App = () => {
@@ -15,10 +16,13 @@ const App = () => {
         <main className="py-8">
           <Switch>
             <Route exact path="/">
-              <DashboardPage />
+              <TrendPage />
             </Route>
-            <Route path="/map">
-              <MapPage />
+            <Route path="/current">
+              <CurrentPage />
+            </Route>
+            <Route path="/compare">
+              <ComparePage />
             </Route>
             <Route path="/about">
               <AboutPage />

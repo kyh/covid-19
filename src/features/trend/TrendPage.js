@@ -8,7 +8,7 @@ import { PageContainer } from 'components/PageContainer';
 import { Featured } from './Featured';
 import { States } from './States';
 
-export const DashboardPage = () => {
+export const TrendPage = () => {
   const { isLoading: isLoadingDaily, data: usDailyData } = useGetUSDailyData();
   const {
     isLoading: isLoadingStates,

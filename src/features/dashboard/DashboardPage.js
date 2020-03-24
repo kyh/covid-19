@@ -17,7 +17,9 @@ export const DashboardPage = () => {
   } = useGetStatesDailyData();
   const { data: statesInfo } = useGetStatesInfo();
 
-  const [selectedState, setSelectedState] = useState(null);
+  const [selectedState, setSelectedState] = useState(
+    localStorage.getItem('selectedState')
+  );
   const [filtered, setFiltered] = useState([...states]);
 
   useEffect(() => {
@@ -28,8 +30,10 @@ export const DashboardPage = () => {
 
   const onSelectState = state => {
     if (selectedState === state) {
+      localStorage.removeItem('selectedState');
       setSelectedState(null);
     } else {
+      localStorage.setItem('selectedState', state);
       setSelectedState(state);
     }
     window.scrollTo({

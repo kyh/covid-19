@@ -1,0 +1,17 @@
+.map .states {
+  fill: none;
+  stroke: #fff;
+  stroke-linejoin: round;
+}
+
+.tooltip {
+  color: white;
+  position: absolute;
+  text-align: center;
+  width: 60px;
+  padding: 5px;
+  font-size: 10px;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 4px;
+  pointer-events: none;
+}

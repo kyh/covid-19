@@ -9,7 +9,7 @@
     "react": "^16.13.1",
     "react-content-loader": "^5.0.2",
     "react-dom": "^16.13.1",
-    "react-fetch-hook": "^1.8.2",
+    "react-fetch-hook": "^1.8.3",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.1",
     "topojson": "^3.0.2",

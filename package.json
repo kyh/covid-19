@@ -12,7 +12,6 @@
     "react-fetch-hook": "^1.8.3",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.3",
-    "snyk": "^1.359.0",
     "topojson": "^3.0.2"
   },
   "scripts": {
@@ -23,9 +22,7 @@
     "start:css": "postcss src/css/tailwind.src.css -o src/tailwind.css -w",
     "build:css": "postcss src/css/tailwind.src.css -o src/tailwind.css --env production",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "snyk-protect": "snyk protect",
-    "prepare": "npm run snyk-protect"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -53,6 +50,5 @@
     "postcss-cli": "^7.1.1",
     "prettier": "^2.0.5",
     "tailwindcss": "^1.6.2"
-  },
-  "snyk": false
+  }
 }

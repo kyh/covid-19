@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 
 const Link = ({ to, children }) => {
   return (
@@ -23,7 +23,6 @@ export const Navigation = () => {
           <div className="flex">
             <Link to="/">Trend</Link>
             <Link to="/current">Current</Link>
-            <Link to="/compare">Compare</Link>
           </div>
           <div className="ml-6 flex items-center">
             <div className="ml-3 relative">

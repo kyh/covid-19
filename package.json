@@ -3,11 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "d3": "^5.16.0",
-    "d3-scale-chromatic": "^1.5.0",
-    "date-fns": "^2.14.0",
+    "@tailwindui/react": "^0.1.1",
+    "d3": "^6.1.0",
+    "d3-scale-chromatic": "^2.0.0",
+    "date-fns": "^2.16.0",
     "react": "^16.13.1",
-    "react-content-loader": "^5.1.0",
+    "react-content-loader": "^5.1.1",
     "react-dom": "^16.13.1",
     "react-fetch-hook": "^1.8.3",
     "react-router-dom": "^5.2.0",
@@ -15,12 +16,12 @@
     "topojson": "^3.0.2"
   },
   "scripts": {
-    "start": "npm-run-all -p start:css start:js",
-    "build": "npm-run-all build:css build:js",
+    "start": "npm run build:css && npm run start:js",
+    "dev": "npm start",
+    "build": "npm run build:css && npm run build:js",
     "start:js": "react-scripts start",
     "build:js": "react-scripts build",
-    "start:css": "postcss src/css/tailwind.src.css -o src/tailwind.css -w",
-    "build:css": "postcss src/css/tailwind.src.css -o src/tailwind.css --env production",
+    "build:css": "npx tailwindcss build src/css/tailwind.src.css -o src/tailwind.css",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -40,15 +41,11 @@
     ]
   },
   "devDependencies": {
-    "@fullhuman/postcss-purgecss": "^2.3.0",
-    "@tailwindcss/ui": "^0.1.4",
-    "@testing-library/jest-dom": "^5.11.3",
-    "@testing-library/react": "^10.4.8",
-    "@testing-library/user-event": "^10.4.1",
-    "autoprefixer": "^9.8.6",
-    "npm-run-all": "^4.1.5",
-    "postcss-cli": "^7.1.1",
-    "prettier": "^2.0.5",
-    "tailwindcss": "^1.6.2"
+    "@tailwindcss/ui": "^0.5.0",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^10.4.9",
+    "@testing-library/user-event": "^12.1.3",
+    "prettier": "^2.1.1",
+    "tailwindcss": "^1.7.6"
   }
 }

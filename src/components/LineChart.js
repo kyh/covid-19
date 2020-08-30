@@ -1,6 +1,6 @@
 import React, { useEffect, createRef } from 'react';
 import { format } from 'date-fns';
-import { select, mouse } from 'd3';
+import { select, pointer } from 'd3';
 import {
   createScales,
   createAxis,
@@ -118,8 +118,8 @@ export const LineChart = ({ data = [], options = defaultOptions }) => {
         const { onMouseEvent, callout } = createTooltipEvents(data, x, y);
         const { tooltip, point, cursorLine } = appendTooltip(svg);
 
-        svg.on('touchmove mousemove', function() {
-          const { date, positive } = onMouseEvent(mouse(this)[0]);
+        svg.on('touchmove mousemove', (event) => {
+          const { date, positive } = onMouseEvent(pointer(event)[0]);
           if (date && positive) {
             tooltip
               .attr('transform', `translate(${x(date)},${0})`)

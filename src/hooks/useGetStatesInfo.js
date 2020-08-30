@@ -2,7 +2,7 @@ import useFetch from 'react-fetch-hook';
 
 export const useGetStatesInfo = () => {
   const { isLoading, data = [] } = useFetch(
-    'https://covidtracking.com/api/states/info'
+    'https://api.covidtracking.com/states/info'
   );
 
   let formatted = {};

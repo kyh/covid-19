@@ -3,7 +3,7 @@ import { formatDaily } from 'utils/formatter';
 
 export const useGetStatesDailyData = () => {
   const { isLoading, data = [] } = useFetch(
-    'https://covidtracking.com/api/states/daily'
+    'https://api.covidtracking.com/states/daily'
   );
 
   let formatted = {};

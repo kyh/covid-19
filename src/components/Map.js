@@ -7,8 +7,7 @@ import {
   range,
   schemeReds,
   axisBottom,
-  json,
-  event
+  json
 } from 'd3';
 import { stateIdToState } from 'utils/map-utils';
 import { appendSvg } from 'utils/chart-utils';
@@ -86,7 +85,7 @@ export const Map = ({ stateToData, totalPositives }) => {
           return color((d.rate = rate * 100));
         })
         .attr('d', path)
-        .on('mouseover', d => {
+        .on('mouseover', (event, d) => {
           const state = stateIdToState[d.id].code;
           tooltip.transition().duration(200).style('opacity', 0.9);
           tooltip

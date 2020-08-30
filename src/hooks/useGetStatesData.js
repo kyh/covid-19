@@ -2,7 +2,7 @@ import useFetch from 'react-fetch-hook';
 
 export const useGetStatesData = () => {
   const { isLoading, data = [] } = useFetch(
-    'https://covidtracking.com/api/states'
+    'https://api.covidtracking.com/states'
   );
   let totalPositives = 0;
   const stateToData = data.reduce((map, d) => {

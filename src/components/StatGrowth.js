@@ -1,7 +1,7 @@
-import React from 'react';
-import ContentLoader from 'react-content-loader';
-import { growthRate } from 'utils/stats';
-import { Icon } from 'components/Icon';
+import React from "react";
+import ContentLoader from "react-content-loader";
+import { growthRate } from "utils/stats";
+import { Icon } from "components/Icon";
 
 export const StatGrowth = ({ data = [], isLoading = false }) => {
   const today = data[data.length - 1] || {};
@@ -28,17 +28,17 @@ export const StatGrowth = ({ data = [], isLoading = false }) => {
             <div className="mr-1">
               <Icon
                 size="sm"
-                icon={positive ? 'trendUp' : 'trendDown'}
-                color={positive ? 'text-red-500' : 'text-green-500'}
+                icon={positive ? "trendUp" : "trendDown"}
+                color={positive ? "text-red-500" : "text-green-500"}
               />
             </div>
-            <span className={positive ? 'text-red-500' : 'text-green-500'}>
-              ({positive ? 'up' : 'down'} from {yesterdayGrowth}%)
+            <span className={positive ? "text-red-500" : "text-green-500"}>
+              ({positive ? "up" : "down"} from {yesterdayGrowth}%)
             </span>
           </div>
         </div>
       ) : (
-        <ContentLoader style={{ width: '100%', height: 44 }}>
+        <ContentLoader style={{ width: "100%", height: 44 }}>
           <rect x="0" y="0" rx="4" ry="4" width="40%" height="24" />
           <rect x="0" y="26" rx="4" ry="4" width="80%" height="18" />
         </ContentLoader>

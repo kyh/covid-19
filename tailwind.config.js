@@ -1,7 +1,7 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
-  purge: ['./src/**/*.html', "./src/**/*.js"],
+  purge: ["./src/**/*.html", "./src/**/*.js"],
   future: {
     removeDeprecatedGapUtilities: true,
   },
@@ -9,6 +9,9 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ["Inter var", ...defaultTheme.fontFamily.sans],
+      },
+      screens: {
+        "light-mode": { raw: "(prefers-color-scheme: light)" },
       },
     },
   },

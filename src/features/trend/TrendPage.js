@@ -1,24 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
-import { useGetUSDailyData } from 'hooks/useGetUSDailyData';
-import { useGetStatesDailyData } from 'hooks/useGetStatesDailyData';
-import { useGetStatesInfo } from 'hooks/useGetStatesInfo';
+import { useGetUSDailyData } from "hooks/useGetUSDailyData";
+import { useGetStatesDailyData } from "hooks/useGetStatesDailyData";
+import { useGetStatesInfo } from "hooks/useGetStatesInfo";
 
-import { PageContainer } from 'components/PageContainer';
-import { Featured } from './Featured';
-import { States } from './States';
+import { PageContainer } from "components/PageContainer";
+import { Featured } from "./Featured";
+import { States } from "./States";
 
 export const TrendPage = () => {
   const { isLoading: isLoadingDaily, data: usDailyData } = useGetUSDailyData();
   const {
     isLoading: isLoadingStates,
     data: statesDailyData,
-    states
+    states,
   } = useGetStatesDailyData();
   const { data: statesInfo } = useGetStatesInfo();
 
   const [selectedState, setSelectedState] = useState(
-    localStorage.getItem('selectedState')
+    localStorage.getItem("selectedState")
   );
   const [filtered, setFiltered] = useState([...states]);
 
@@ -28,28 +28,28 @@ export const TrendPage = () => {
     }
   }, [states.length]);
 
-  const onSelectState = state => {
+  const onSelectState = (state) => {
     if (selectedState === state) {
-      localStorage.removeItem('selectedState');
+      localStorage.removeItem("selectedState");
       setSelectedState(null);
     } else {
-      localStorage.setItem('selectedState', state);
+      localStorage.setItem("selectedState", state);
       setSelectedState(state);
     }
     window.scrollTo({
       top: 0,
       left: 0,
-      behavior: 'smooth'
+      behavior: "smooth",
     });
   };
 
-  const onSearchState = event => {
+  const onSearchState = (event) => {
     const value = event.target.value;
     if (!value) {
       setFiltered([...states]);
     } else {
       setFiltered(
-        states.filter(s => s.toLowerCase().includes(value.toLowerCase()))
+        states.filter((s) => s.toLowerCase().includes(value.toLowerCase()))
       );
     }
   };

@@ -1,18 +1,18 @@
-import React from 'react';
-import ContentLoader from 'react-content-loader';
+import React from "react";
+import ContentLoader from "react-content-loader";
 
-import { Card } from 'components/Card';
-import { StatTotal } from 'components/StatTotal';
-import { StatGrowth } from 'components/StatGrowth';
-import { StatMortality } from 'components/StatMortality';
-import { StatStateDetails } from 'components/StatStateDetails';
-import { LineChart } from 'components/LineChart';
+import { Card } from "components/Card";
+import { StatTotal } from "components/StatTotal";
+import { StatGrowth } from "components/StatGrowth";
+import { StatMortality } from "components/StatMortality";
+import { StatStateDetails } from "components/StatStateDetails";
+import { LineChart } from "components/LineChart";
 
 export const Featured = ({
   dailyData,
   statesInfo,
   selectedState,
-  isLoading
+  isLoading,
 }) => {
   return (
     <div className="sm:flex pb-8 px-4 sm:px-0">
@@ -27,7 +27,7 @@ export const Featured = ({
         {dailyData.length ? (
           <LineChart data={dailyData} />
         ) : (
-          <ContentLoader style={{ width: '100%', height: '300px' }}>
+          <ContentLoader style={{ width: "100%", height: "300px" }}>
             <rect x="0" y="0" rx="4" ry="4" width="100%" height="100%" />
           </ContentLoader>
         )}

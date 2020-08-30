@@ -1,12 +1,12 @@
-import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import React from "react";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 
-import { Navigation } from 'components/Navigation';
-import { Footer } from 'components/Footer';
-import { TrendPage } from 'features/trend/TrendPage';
-import { CurrentPage } from 'features/current/CurrentPage';
-import { ComparePage } from 'features/compare/ComparePage';
-import { AboutPage } from 'features/about/AboutPage';
+import { Navigation } from "components/Navigation";
+import { Footer } from "components/Footer";
+import { TrendPage } from "features/trend/TrendPage";
+import { CurrentPage } from "features/current/CurrentPage";
+import { ComparePage } from "features/compare/ComparePage";
+import { AboutPage } from "features/about/AboutPage";
 
 const App = () => {
   return (

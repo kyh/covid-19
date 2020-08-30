@@ -1,8 +1,8 @@
-import React from 'react';
-import ContentLoader from 'react-content-loader';
-import { useGetStatesData } from 'hooks/useGetStatesData';
-import { PageContainer } from 'components/PageContainer';
-import { Map } from 'components/Map';
+import React from "react";
+import ContentLoader from "react-content-loader";
+import { useGetStatesData } from "hooks/useGetStatesData";
+import { PageContainer } from "components/PageContainer";
+import { Map } from "components/Map";
 
 export const CurrentPage = () => {
   const { stateToData, totalPositives, isLoading } = useGetStatesData();

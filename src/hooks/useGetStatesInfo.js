@@ -1,8 +1,8 @@
-import useFetch from 'react-fetch-hook';
+import useFetch from "react-fetch-hook";
 
 export const useGetStatesInfo = () => {
   const { isLoading, data = [] } = useFetch(
-    'https://api.covidtracking.com/states/info'
+    "https://api.covidtracking.com/states/info"
   );
 
   let formatted = {};

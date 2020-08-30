@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 export const iconMap = {
   trendUp: (
@@ -6,20 +6,20 @@ export const iconMap = {
   ),
   trendDown: (
     <path d="M20 9a1 1 0 0 1 2 0v8a1 1 0 0 1-1 1h-8a1 1 0 0 1 0-2h5.59L13 10.41l-3.3 3.3a1 1 0 0 1-1.4 0l-6-6a1 1 0 0 1 1.4-1.42L9 11.6l3.3-3.3a1 1 0 0 1 1.4 0l6.3 6.3V9z" />
-  )
+  ),
 };
 
 const iconSizeMap = {
-  xs: '12px',
-  sm: '20px',
-  md: '24px',
-  lg: '40px'
+  xs: "12px",
+  sm: "20px",
+  md: "24px",
+  lg: "40px",
 };
 
 export const Icon = ({
-  icon = '',
-  color = 'text-gray-800',
-  size = 'md',
+  icon = "",
+  color = "text-gray-800",
+  size = "md",
   ...rest
 }) => {
   const iconPath = iconMap[icon];

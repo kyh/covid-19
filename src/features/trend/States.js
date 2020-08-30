@@ -1,9 +1,9 @@
-import React from 'react';
-import ContentLoader from 'react-content-loader';
+import React from "react";
+import ContentLoader from "react-content-loader";
 
-import { Input } from 'components/Input';
-import { Card } from 'components/Card';
-import { LineChart } from 'components/LineChart';
+import { Input } from "components/Input";
+import { Card } from "components/Card";
+import { LineChart } from "components/LineChart";
 
 export const States = ({
   states,
@@ -12,7 +12,7 @@ export const States = ({
   selectedState,
   statesDailyData,
   onSelectState,
-  onSearchState
+  onSearchState,
 }) => {
   return (
     <div className="px-4 sm:px-0">
@@ -25,20 +25,20 @@ export const States = ({
           onChange={onSearchState}
         />
         <datalist id="states">
-          {states.map(s => (
+          {states.map((s) => (
             <option key={s}>{s}</option>
           ))}
         </datalist>
       </div>
       {isLoading ? (
-        <ContentLoader style={{ width: '100%', height: 180 }}>
+        <ContentLoader style={{ width: "100%", height: 180 }}>
           <rect x="0" y="0" rx="4" ry="4" width="30%" height="100%" />
           <rect x="33%" y="0" rx="4" ry="4" width="30%" height="100%" />
           <rect x="66%" y="0" rx="4" ry="4" width="30%" height="100%" />
         </ContentLoader>
       ) : (
         <div className="grid sm:grid-cols-3 gap-4">
-          {filtered.map(state => {
+          {filtered.map((state) => {
             const data = statesDailyData[state];
             return (
               <button
@@ -65,8 +65,8 @@ export const States = ({
                         top: 0,
                         bottom: 20,
                         left: 0,
-                        right: 0
-                      }
+                        right: 0,
+                      },
                     }}
                   />
                 </Card>

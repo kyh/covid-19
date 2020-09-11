@@ -11,7 +11,7 @@ import { AboutPage } from "features/about/AboutPage";
 const App = () => {
   return (
     <BrowserRouter>
-      <div className="min-h-screen">
+      <div className="min-h-screen bg-gray-800">
         <Navigation />
         <main className="py-8">
           <Switch>

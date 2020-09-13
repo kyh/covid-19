@@ -11,9 +11,12 @@ import { AboutPage } from "features/about/AboutPage";
 const App = () => {
   return (
     <BrowserRouter>
-      <div className="min-h-screen bg-gray-800">
+      <section
+        className="text-gray-300 antialiased h-screen bg-gray-900 grid"
+        style={{ gridTemplateRows: "auto 1fr auto" }}
+      >
         <Navigation />
-        <main className="py-8">
+        <main className="py-8 overflow-hidden">
           <Switch>
             <Route exact path="/">
               <TrendPage />
@@ -30,7 +33,7 @@ const App = () => {
           </Switch>
         </main>
         <Footer />
-      </div>
+      </section>
     </BrowserRouter>
   );
 };

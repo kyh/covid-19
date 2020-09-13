@@ -5,6 +5,7 @@ import { useGetStatesDailyData } from "hooks/useGetStatesDailyData";
 import { useGetStatesInfo } from "hooks/useGetStatesInfo";
 
 import { PageContainer } from "components/PageContainer";
+import { Sidebar } from "components/Sidebar";
 import { Featured } from "./Featured";
 import { States } from "./States";
 
@@ -56,13 +57,7 @@ export const TrendPage = () => {
 
   return (
     <PageContainer>
-      <Featured
-        dailyData={statesDailyData[selectedState] || usDailyData}
-        statesInfo={statesInfo}
-        selectedState={selectedState}
-        isLoading={isLoadingDaily}
-      />
-      <States
+      <Sidebar
         states={states}
         filtered={filtered}
         isLoading={isLoadingStates}
@@ -71,6 +66,22 @@ export const TrendPage = () => {
         onSelectState={onSelectState}
         onSearchState={onSearchState}
       />
+      <section>Main</section>
+      {/* <Featured
+        dailyData={statesDailyData[selectedState] || usDailyData}
+        statesInfo={statesInfo}
+        selectedState={selectedState}
+        isLoading={isLoadingDaily}
+      /> */}
+      {/* <States
+        states={states}
+        filtered={filtered}
+        isLoading={isLoadingStates}
+        selectedState={selectedState}
+        statesDailyData={statesDailyData}
+        onSelectState={onSelectState}
+        onSearchState={onSearchState}
+      /> */}
     </PageContainer>
   );
 };

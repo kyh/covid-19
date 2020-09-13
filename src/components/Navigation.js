@@ -6,8 +6,8 @@ const Link = ({ to, children }) => {
     <NavLink
       to={to}
       exact
-      activeClassName="bg-gray-900 hover:bg-gray-900 focus:bg-gray-900"
-      className="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
+      activeClassName="bg-gray-800 hover:bg-gray-800 focus:bg-gray-800"
+      className="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-800 focus:outline-none focus:text-white focus:bg-gray-800"
     >
       {children}
     </NavLink>
@@ -17,19 +17,19 @@ const Link = ({ to, children }) => {
 export const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   return (
-    <nav class="bg-gray-800">
-      <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="border-b border-gray-700">
-          <div class="flex items-center justify-between h-16 px-4 sm:px-0">
-            <div class="flex items-center">
-              <div class="flex-shrink-0">
+    <nav className="bg-gray-900">
+      <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div className="border-b border-gray-700">
+          <div className="flex items-center justify-between h-16 px-4 sm:px-0">
+            <div className="flex items-center">
+              <div className="flex-shrink-0">
                 <img
-                  class="h-8 w-8"
+                  className="h-8 w-8"
                   src="https://tailwindui.com/img/logos/workflow-mark-on-dark.svg"
                   alt="Workflow logo"
                 />
               </div>
-              <div class="ml-10 flex items-baseline space-x-4">
+              <div className="ml-10 flex items-baseline space-x-4">
                 <Link to="/">Trend</Link>
                 <Link to="/current">Current</Link>
               </div>

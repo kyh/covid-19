@@ -15,7 +15,7 @@ export const Featured = ({
   isLoading,
 }) => {
   return (
-    <div className="sm:flex pb-8 px-4 sm:px-0">
+    <div className="flex flex-1">
       <div className="sm:w-3/4 sm:pr-10">
         <div className="mb-2">
           <StatTotal

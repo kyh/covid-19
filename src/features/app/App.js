@@ -12,26 +12,24 @@ const App = () => {
   return (
     <BrowserRouter>
       <section
-        className="text-gray-300 antialiased h-screen bg-gray-900 grid"
+        className="text-gray-300 antialiased min-h-screen bg-gray-900 grid"
         style={{ gridTemplateRows: "auto 1fr auto" }}
       >
         <Navigation />
-        <main className="py-8 overflow-hidden">
-          <Switch>
-            <Route exact path="/">
-              <TrendPage />
-            </Route>
-            <Route path="/current">
-              <CurrentPage />
-            </Route>
-            <Route path="/compare">
-              <ComparePage />
-            </Route>
-            <Route path="/about">
-              <AboutPage />
-            </Route>
-          </Switch>
-        </main>
+        <Switch>
+          <Route exact path="/">
+            <TrendPage />
+          </Route>
+          <Route path="/current">
+            <CurrentPage />
+          </Route>
+          <Route path="/compare">
+            <ComparePage />
+          </Route>
+          <Route path="/about">
+            <AboutPage />
+          </Route>
+        </Switch>
         <Footer />
       </section>
     </BrowserRouter>

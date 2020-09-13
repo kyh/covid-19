@@ -17,7 +17,7 @@ const Link = ({ to, children }) => {
 export const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   return (
-    <nav className="bg-gray-900">
+    <nav className="mb-8">
       <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div className="border-b border-gray-700">
           <div className="flex items-center justify-between h-16 px-4 sm:px-0">

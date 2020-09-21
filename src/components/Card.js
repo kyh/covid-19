@@ -1,8 +1,10 @@
 import React from "react";
 
-export const Card = ({ children }) => {
+export const Card = ({ children, className = "" }) => {
   return (
-    <div className="overflow-hidden rounded-sm border border-gray-700 px-4 py-5 sm:p-6">
+    <div
+      className={`overflow-hidden rounded-sm border border-gray-700 py-4 px-6 ${className}`}
+    >
       {children}
     </div>
   );

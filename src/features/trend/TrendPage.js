@@ -5,9 +5,9 @@ import { useGetStatesDailyData } from "hooks/useGetStatesDailyData";
 import { useGetStatesInfo } from "hooks/useGetStatesInfo";
 
 import { PageContainer } from "components/PageContainer";
-import { Sidebar } from "components/Sidebar";
+import { Sidebar } from "features/trend/Sidebar";
 import { Featured } from "./Featured";
-import { States } from "./States";
+import "./TrendPage.css";
 
 export const TrendPage = () => {
   const { isLoading: isLoadingDaily, data: usDailyData } = useGetUSDailyData();
@@ -37,11 +37,6 @@ export const TrendPage = () => {
       localStorage.setItem("selectedState", state);
       setSelectedState(state);
     }
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: "smooth",
-    });
   };
 
   const onSearchState = (event) => {
@@ -58,30 +53,19 @@ export const TrendPage = () => {
   return (
     <PageContainer>
       <Sidebar
-        states={states}
-        filtered={filtered}
+        states={filtered}
         isLoading={isLoadingStates}
         selectedState={selectedState}
-        statesDailyData={statesDailyData}
         onSelectState={onSelectState}
-        onSearchState={onSearchState}
+        statesDailyData={statesDailyData}
+        usDailyData={usDailyData}
       />
-      <section>Main</section>
-      {/* <Featured
+      <Featured
         dailyData={statesDailyData[selectedState] || usDailyData}
         statesInfo={statesInfo}
         selectedState={selectedState}
         isLoading={isLoadingDaily}
-      /> */}
-      {/* <States
-        states={states}
-        filtered={filtered}
-        isLoading={isLoadingStates}
-        selectedState={selectedState}
-        statesDailyData={statesDailyData}
-        onSelectState={onSelectState}
-        onSearchState={onSearchState}
-      /> */}
+      />
     </PageContainer>
   );
 };

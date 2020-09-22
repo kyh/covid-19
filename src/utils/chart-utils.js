@@ -61,8 +61,8 @@ export const createTooltipEvents = (data, x, y) => {
       .selectAll("path")
       .data([null])
       .join("path")
-      .attr("fill", "white")
-      .attr("stroke", "#a0aec0");
+      .attr("fill", "#252f3f")
+      .attr("stroke", "#374151");
 
     const text = g
       .selectAll("text")
@@ -73,6 +73,7 @@ export const createTooltipEvents = (data, x, y) => {
           .selectAll("tspan")
           .data((value + "").split(/\n/))
           .join("tspan")
+          .attr("fill", "#d2d6dc")
           .attr("x", 0)
           .attr("y", (_, i) => `${i * 1.1}em`)
           .text((d) => d)
@@ -132,14 +133,14 @@ export const appendDefs = (svg) => {
     .append("stop")
     .attr("class", "start")
     .attr("offset", "0%")
-    .attr("stop-color", "#f56565")
+    .attr("stop-color", "#0694a2")
     .attr("stop-opacity", 1);
 
   gradient
     .append("stop")
     .attr("class", "end")
     .attr("offset", "80%")
-    .attr("stop-color", "white")
+    .attr("stop-color", "#161e2e10")
     .attr("stop-opacity", 1);
 
   return defs;

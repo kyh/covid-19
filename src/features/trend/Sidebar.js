@@ -29,7 +29,7 @@ export const Sidebar = ({
               >
                 <div className="flex justify-between mb-2">
                   <span>{stateAbbrevToFullname[state]}</span>
-                  <span>{lastDay.positive}</span>
+                  <span>{lastDay.positive.toLocaleString()}</span>
                 </div>
                 <Progress value={lastDay.positive} total={lastUSDay.positive} />
               </button>

@@ -9,20 +9,20 @@
 }
 
 .chart .y-axis line {
-  stroke: #e2e8f0;
+  stroke: #374151;
   stroke-dasharray: 2, 2;
 }
 
 .chart .growth-line {
-  stroke: #f56565;
+  stroke: #0694a2;
 }
 
 .chart .cursor-line {
-  stroke: #a0aec0;
+  stroke: #4b5563;
   stroke-dasharray: 2, 2;
 }
 
 .chart .cursor-point {
-  fill: #a0aec0;
-  stroke: #fff;
+  fill: #4b5563;
+  stroke: #d2d6dc;
 }

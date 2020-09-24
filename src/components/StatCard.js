@@ -12,17 +12,34 @@ const Point = ({ label = "", color = "green" }) => {
   );
 };
 
+export const CardLabel = ({ label, lowercase }) => (
+  <span
+    className={`font-medium text-gray-400 text-2xs ${
+      lowercase ? "" : "uppercase"
+    }`}
+  >
+    {label}
+  </span>
+);
+
 export const StatCard = ({ color, label, value, suffix }) => {
   return (
-    <Card className="text-xs">
-      <div className="flex text-gray-400">
+    <Card>
+      <div className="flex items-center">
         <Point label={label} color={color} />
-        <p className="font-medium uppercase">{label}</p>
+        <CardLabel label={label} />
       </div>
-      <div className="pl-6">
-        <span className="text-gray-100">{value}</span>
-        {!!suffix && <span>{suffix}</span>}
+      <div className="flex pl-6 items-baseline">
+        <span className="text-gray-100 text-sm mr-1">{value}</span>
+        {!!suffix && <span className="text-gray-400 text-2xs">{suffix}</span>}
       </div>
     </Card>
   );
 };
+
+export const StatRow = ({ label, value, lowercase }) => (
+  <div className="flex items-center justify-between">
+    <CardLabel label={label} lowercase={lowercase} />
+    <span className="text-gray-100 text-sm">{value}</span>
+  </div>
+);

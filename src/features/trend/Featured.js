@@ -4,6 +4,7 @@ import ContentLoader from "react-content-loader";
 import { Card } from "components/Card";
 import { StatCard, StatRow } from "components/StatCard";
 import { LineChart } from "components/LineChart";
+import { growthRate } from "utils/stats";
 
 export const Featured = ({
   dailyData,
@@ -52,8 +53,15 @@ export const Featured = ({
         <Card>
           <StatRow
             label="2 week average change in new cases"
-            value="7.7%"
+            value={
+              today &&
+              `${growthRate(
+                twoWeeksAgo.positiveIncrease,
+                today.positiveIncrease
+              )}%`
+            }
             isLoading={!!dailyData.length}
+            lowercase
           />
           <StatRow
             label="New daily cases today"
@@ -75,17 +83,24 @@ export const Featured = ({
         <Card>
           <StatRow
             label="2 week average change in deaths"
-            isLoading={!!dailyData.length}
-          />
-          <StatRow
-            label="Average Deaths Yesterday"
-            value="93"
+            value={
+              today &&
+              `${growthRate(twoWeeksAgo.deathIncrease, today.deathIncrease)}%`
+            }
             isLoading={!!dailyData.length}
             lowercase
           />
           <StatRow
-            label="Average Deaths 2 Weeks Ago"
-            value="107"
+            label="New death cases today"
+            value={today && today.deathIncrease.toLocaleString()}
+            isLoading={!!dailyData.length}
+            lowercase
+          />
+          <StatRow
+            label="New death cases 2 weeks ago"
+            value={
+              twoWeeksAgo ? twoWeeksAgo.deathIncrease.toLocaleString() : "N/A"
+            }
             isLoading={!!dailyData.length}
             lowercase
           />

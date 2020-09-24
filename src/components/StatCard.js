@@ -22,9 +22,9 @@ export const CardLabel = ({ label, lowercase }) => (
   </span>
 );
 
-export const StatCard = ({ color, label, value, suffix }) => {
+export const StatCard = ({ color, label, value, suffix, className }) => {
   return (
-    <Card>
+    <Card className={className}>
       <div className="flex items-center">
         <Point label={label} color={color} />
         <CardLabel label={label} />

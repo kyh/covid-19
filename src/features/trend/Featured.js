@@ -17,20 +17,20 @@ export const Featured = ({
   const twoWeeksAgo = dailyData[dailyData.length - 13];
   console.log(today);
   return (
-    <section className="featured-content flex-1 grid">
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 mb-4">
+    <section className="featured-content flex flex-col flex-1">
+      <div className="grid grid-cols-4 gap-4 mb-4">
         <StatCard
           label="Total Cases"
           color="teal"
           value={today && today.positive.toLocaleString()}
-          isLoading={!!dailyData.length}
+          isLoading={isLoading}
         />
         <StatCard
           label="First Case"
           color="gray"
           value={differenceInDays(new Date(), firstDay && firstDay.date)}
           suffix="days ago"
-          isLoading={!!dailyData.length}
+          isLoading={isLoading}
         />
         <StatCard
           label="Recovered"
@@ -40,16 +40,16 @@ export const Featured = ({
               ? today.recovered.toLocaleString()
               : "Unknown"
           }
-          isLoading={!!dailyData.length}
+          isLoading={isLoading}
         />
         <StatCard
           label="Deaths"
           color="red"
           value={today && today.death.toLocaleString()}
-          isLoading={!!dailyData.length}
+          isLoading={isLoading}
         />
       </div>
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 mb-4">
+      <div className="grid grid-cols-2 gap-4 mb-4">
         <Card>
           <StatRow
             label="2 week average change in new cases"
@@ -60,13 +60,13 @@ export const Featured = ({
                 today.positiveIncrease
               )}%`
             }
-            isLoading={!!dailyData.length}
+            isLoading={isLoading}
             lowercase
           />
           <StatRow
             label="New daily cases today"
             value={today && today.positiveIncrease.toLocaleString()}
-            isLoading={!!dailyData.length}
+            isLoading={isLoading}
             lowercase
           />
           <StatRow
@@ -76,7 +76,7 @@ export const Featured = ({
                 ? twoWeeksAgo.positiveIncrease.toLocaleString()
                 : "N/A"
             }
-            isLoading={!!dailyData.length}
+            isLoading={isLoading}
             lowercase
           />
         </Card>
@@ -87,13 +87,13 @@ export const Featured = ({
               today &&
               `${growthRate(twoWeeksAgo.deathIncrease, today.deathIncrease)}%`
             }
-            isLoading={!!dailyData.length}
+            isLoading={isLoading}
             lowercase
           />
           <StatRow
             label="New death cases today"
             value={today && today.deathIncrease.toLocaleString()}
-            isLoading={!!dailyData.length}
+            isLoading={isLoading}
             lowercase
           />
           <StatRow
@@ -101,20 +101,14 @@ export const Featured = ({
             value={
               twoWeeksAgo ? twoWeeksAgo.deathIncrease.toLocaleString() : "N/A"
             }
-            isLoading={!!dailyData.length}
+            isLoading={isLoading}
             lowercase
           />
         </Card>
       </div>
-      {dailyData.length ? (
-        <Card className="w-full">
-          <LineChart data={dailyData} />
-        </Card>
-      ) : (
-        <ContentLoader style={{ width: "100%", height: "300px" }}>
-          <rect x="0" y="0" rx="4" ry="4" width="100%" height="100%" />
-        </ContentLoader>
-      )}
+      <Card className="flex-1">
+        <LineChart data={dailyData} />
+      </Card>
     </section>
   );
 };

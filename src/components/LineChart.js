@@ -17,7 +17,7 @@ const defaultOptions = {
     top: 20,
     right: 30,
     bottom: 30,
-    left: 40,
+    left: 50,
   },
   tooltip: true,
   xAxis: true,
@@ -120,7 +120,10 @@ export const LineChart = ({ data = [], options = defaultOptions }) => {
           if (date && positive) {
             tooltip
               .attr("transform", `translate(${x(date)},${0})`)
-              .call(callout, `${format(date, "MM/dd")} - ${positive}`);
+              .call(
+                callout,
+                `${format(date, "MM/dd")} - ${positive.toLocaleString()}`
+              );
             cursorLine
               .style("display", null)
               .attr("y1", 0)

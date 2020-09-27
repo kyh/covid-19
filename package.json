@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@tailwindui/react": "^0.1.1",
-    "d3": "^6.1.1",
+    "d3": "^6.2.0",
     "d3-scale-chromatic": "^2.0.0",
     "date-fns": "^2.16.1",
     "react": "^16.13.1",
@@ -45,7 +45,7 @@
     "@tailwindcss/ui": "^0.6.2",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^10.4.9",
-    "@testing-library/user-event": "^12.1.5",
+    "@testing-library/user-event": "^12.1.6",
     "prettier": "^2.1.2",
     "tailwindcss": "^1.8.10"
   }

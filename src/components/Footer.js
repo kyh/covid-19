@@ -3,7 +3,7 @@ import React from "react";
 export const Footer = () => {
   return (
     <footer>
-      <div className="flex justify-between max-w-7xl mx-auto py-4 sm:px-6 lg:px-8 text-sm text-gray-400">
+      <div className="flex justify-between max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 text-sm text-gray-400">
         <span>© {new Date().getFullYear()}, Kaiyu Hsu</span>
         <div>
           <a

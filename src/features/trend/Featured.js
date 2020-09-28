@@ -78,14 +78,14 @@ export const Featured = ({ dailyData, selectedState, isLoading }) => {
   const comparator = dailyData[dailyData.length - label.days];
 
   return (
-    <section className="featured-content flex flex-col flex-1">
+    <section className="featured-content flex flex-col flex-1 px-4 sm:px-0">
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-lg">
           {stateAbbrevToFullname[selectedState] || "United States"}
         </h1>
         <DataFilter selected={selectedFilter} onSelectFilter={onSelectFilter} />
       </div>
-      <div className="grid grid-cols-4 gap-4 mb-4">
+      <div className="sm:grid grid-cols-4 gap-4 mb-4">
         <StatCard
           label="Total Cases"
           color="teal"
@@ -116,7 +116,7 @@ export const Featured = ({ dailyData, selectedState, isLoading }) => {
           isLoading={isLoading}
         />
       </div>
-      <div className="grid grid-cols-2 gap-4 mb-4">
+      <div className="sm:grid grid-cols-2 gap-4 mb-4">
         <Card>
           <StatRow
             label={label.positiveChange}

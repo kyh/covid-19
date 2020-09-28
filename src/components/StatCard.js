@@ -31,7 +31,6 @@ export const StatCard = ({
   className,
   isLoading,
 }) => {
-  console.log(isLoading);
   return (
     <Card className={className}>
       <div className="flex items-center">

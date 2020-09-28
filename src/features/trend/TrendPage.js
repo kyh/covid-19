@@ -17,13 +17,13 @@ export const TrendPage = () => {
   } = useGetStatesDailyData();
 
   const [selectedState, setSelectedState] = useState(
-    localStorage.getItem("selectedState")
+    localStorage.getItem("selectedState") || undefined
   );
 
   const onSelectState = (state) => {
     if (selectedState === state) {
       localStorage.removeItem("selectedState");
-      setSelectedState(null);
+      setSelectedState(undefined);
     } else {
       localStorage.setItem("selectedState", state);
       setSelectedState(state);

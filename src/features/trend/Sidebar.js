@@ -67,9 +67,7 @@ export const Sidebar = ({
             value={selectedState}
             onChange={(event) => onSelectState(event.target.value)}
           >
-            <option value={undefined} key="null">
-              United States
-            </option>
+            <option value={undefined}>United States</option>
             <optgroup label="States">
               {states.map((state) => (
                 <option value={state} key={state}>

@@ -1,7 +1,7 @@
-import useFetch from "react-fetch-hook";
+import useSWR from "swr";
 
 export const useGetStatesInfo = () => {
-  const { isLoading, data = [] } = useFetch(
+  const { isLoading, data = [] } = useSWR(
     "https://api.covidtracking.com/states/info"
   );
 

@@ -27,6 +27,9 @@ export const DataFilter = ({ selected, onSelectFilter }) => {
         value={selected}
         onChange={(event) => onSelectFilter(event.target.value)}
       >
+        <option value={SELECTIONS.time} disabled>
+          Trends
+        </option>
         <option value={SELECTIONS.trendDay}>1 Day Trend</option>
         <option value={SELECTIONS.trendWeek}>1 Week Trend</option>
         <option value={SELECTIONS.trendBiWeek}>2 Week Trend</option>

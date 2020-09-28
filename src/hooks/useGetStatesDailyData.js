@@ -1,8 +1,8 @@
-import useFetch from "react-fetch-hook";
+import useSWR from "swr";
 import { formatDaily } from "utils/formatter";
 
 export const useGetStatesDailyData = () => {
-  const { isLoading, data = [] } = useFetch(
+  const { isLoading, data = [] } = useSWR(
     "https://api.covidtracking.com/states/daily"
   );
 

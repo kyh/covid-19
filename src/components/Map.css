@@ -1,11 +1,11 @@
 .chart .states {
   fill: none;
-  stroke: #fff;
+  stroke: #161e2e;
   stroke-linejoin: round;
 }
 
 .tooltip {
-  color: white;
+  color: #fff;
   position: absolute;
   text-align: center;
   width: 60px;

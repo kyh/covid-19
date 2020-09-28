@@ -94,14 +94,14 @@ export const Featured = ({ dailyData, selectedState, isLoading }) => {
         />
         <StatCard
           label="First Case"
-          color="gray"
+          color="yellow"
           value={differenceInDays(new Date(), firstDay && firstDay.date)}
           suffix="days ago"
           isLoading={isLoading}
         />
         <StatCard
           label="Recovered"
-          color="green"
+          color="purple"
           value={
             today && today.recovered
               ? today.recovered.toLocaleString()
@@ -111,7 +111,7 @@ export const Featured = ({ dailyData, selectedState, isLoading }) => {
         />
         <StatCard
           label="Deaths"
-          color="red"
+          color="pink"
           value={today && today.death.toLocaleString()}
           isLoading={isLoading}
         />

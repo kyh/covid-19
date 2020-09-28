@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import { useGetUSDailyData } from "hooks/useGetUSDailyData";
 import { useGetStatesDailyData } from "hooks/useGetStatesDailyData";
@@ -19,13 +19,6 @@ export const TrendPage = () => {
   const [selectedState, setSelectedState] = useState(
     localStorage.getItem("selectedState")
   );
-  const [filtered, setFiltered] = useState([...states]);
-
-  useEffect(() => {
-    if (states.length) {
-      setFiltered([...states]);
-    }
-  }, [states.length]);
 
   const onSelectState = (state) => {
     if (selectedState === state) {
@@ -37,21 +30,10 @@ export const TrendPage = () => {
     }
   };
 
-  const onSearchState = (event) => {
-    const value = event.target.value;
-    if (!value) {
-      setFiltered([...states]);
-    } else {
-      setFiltered(
-        states.filter((s) => s.toLowerCase().includes(value.toLowerCase()))
-      );
-    }
-  };
-
   return (
     <PageContainer>
       <Sidebar
-        states={filtered}
+        states={states}
         isLoading={isLoadingStates}
         selectedState={selectedState}
         onSelectState={onSelectState}

@@ -2,9 +2,7 @@ import useSWR from "swr";
 import { formatDaily } from "utils/formatter";
 
 export const useGetStatesDailyData = () => {
-  const { isLoading, data = [] } = useSWR(
-    "https://api.covidtracking.com/states/daily"
-  );
+  const { data = [] } = useSWR("https://api.covidtracking.com/states/daily");
 
   let formatted = {};
   if (Array.isArray(data)) {
@@ -21,5 +19,9 @@ export const useGetStatesDailyData = () => {
       }, {});
   }
 
-  return { isLoading, data: formatted, states: Object.keys(formatted).sort() };
+  return {
+    isLoading: !data.length,
+    data: formatted,
+    states: Object.keys(formatted).sort(),
+  };
 };

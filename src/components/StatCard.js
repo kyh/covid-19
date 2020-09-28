@@ -1,5 +1,6 @@
 import React from "react";
 import { Card } from "components/Card";
+import { Loader } from "components/Loader";
 
 const Point = ({ label = "", color = "green" }) => {
   return (
@@ -22,7 +23,15 @@ export const CardLabel = ({ label, lowercase }) => (
   </span>
 );
 
-export const StatCard = ({ color, label, value, suffix, className }) => {
+export const StatCard = ({
+  color,
+  label,
+  value,
+  suffix,
+  className,
+  isLoading,
+}) => {
+  console.log(isLoading);
   return (
     <Card className={className}>
       <div className="flex items-center">
@@ -30,8 +39,18 @@ export const StatCard = ({ color, label, value, suffix, className }) => {
         <CardLabel label={label} />
       </div>
       <div className="flex pl-6 items-baseline">
-        <span className="text-gray-100 text-sm mr-1">{value}</span>
-        {!!suffix && <span className="text-gray-400 text-2xs">{suffix}</span>}
+        {isLoading ? (
+          <Loader width="100%" height="21">
+            <rect x="0" y="0" rx="5" ry="5" width="100%" height="100%" />
+          </Loader>
+        ) : (
+          <>
+            <span className="text-gray-100 text-sm mr-1">{value}</span>
+            {!!suffix && (
+              <span className="text-gray-400 text-2xs">{suffix}</span>
+            )}
+          </>
+        )}
       </div>
     </Card>
   );

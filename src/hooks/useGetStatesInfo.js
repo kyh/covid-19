@@ -1,9 +1,7 @@
 import useSWR from "swr";
 
 export const useGetStatesInfo = () => {
-  const { isLoading, data = [] } = useSWR(
-    "https://api.covidtracking.com/states/info"
-  );
+  const { data = [] } = useSWR("https://api.covidtracking.com/states/info");
 
   let formatted = {};
   if (Array.isArray(data)) {
@@ -13,5 +11,5 @@ export const useGetStatesInfo = () => {
     }, {});
   }
 
-  return { isLoading, data: formatted };
+  return { isLoading: !data.length, data: formatted };
 };

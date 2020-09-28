@@ -9,7 +9,7 @@ export const Input = ({ label, ...rest }) => {
       <div className="relative rounded-md shadow-sm">
         <input
           id={label}
-          className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline block w-full sm:text-sm sm:leading-5"
+          className="appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline block w-full sm:text-sm sm:leading-5"
           {...rest}
         />
       </div>

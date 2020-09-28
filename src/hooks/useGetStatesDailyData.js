@@ -21,5 +21,5 @@ export const useGetStatesDailyData = () => {
       }, {});
   }
 
-  return { isLoading, data: formatted, states: Object.keys(formatted) };
+  return { isLoading, data: formatted, states: Object.keys(formatted).sort() };
 };

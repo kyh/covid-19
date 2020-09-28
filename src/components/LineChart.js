@@ -14,9 +14,9 @@ import "./LineChart.css";
 
 const defaultOptions = {
   margin: {
-    top: 20,
+    top: 10,
     right: 30,
-    bottom: 30,
+    bottom: 40,
     left: 50,
   },
   tooltip: true,
@@ -24,7 +24,11 @@ const defaultOptions = {
   yAxis: true,
 };
 
-export const LineChart = ({ data = [], options = defaultOptions }) => {
+export const LineChart = ({
+  data = [],
+  dataKey = "positive",
+  options = defaultOptions,
+}) => {
   const container = createRef();
 
   useEffect(() => {
@@ -41,9 +45,9 @@ export const LineChart = ({ data = [], options = defaultOptions }) => {
     const height = mergedOptions.height || 300;
 
     if (data.length) {
-      const { x, y } = createScales(data, width, height, margin);
+      const { x, y } = createScales(data, dataKey, width, height, margin);
       const { xAxis, yAxis } = createAxis(width, x, y);
-      const { line, area } = createLineFn(x, y);
+      const { line, area } = createLineFn(dataKey, x, y);
       let svg = select(container.current).select(".chart");
 
       if (svg.empty()) {
@@ -116,24 +120,24 @@ export const LineChart = ({ data = [], options = defaultOptions }) => {
         const { tooltip, point, cursorLine } = appendTooltip(svg);
 
         svg.on("touchmove mousemove", (event) => {
-          const { date, positive } = onMouseEvent(pointer(event)[0]);
-          if (date && positive) {
+          const e = onMouseEvent(pointer(event)[0]);
+          if (e.date && e[dataKey]) {
             tooltip
-              .attr("transform", `translate(${x(date)},${0})`)
+              .attr("transform", `translate(${x(e.date)},${0})`)
               .call(
                 callout,
-                `${format(date, "MM/dd")} - ${positive.toLocaleString()}`
+                `${format(e.date, "MM/dd")} - ${e[dataKey].toLocaleString()}`
               );
             cursorLine
               .style("display", null)
               .attr("y1", 0)
-              .attr("x1", x(date))
+              .attr("x1", x(e.date))
               .attr("y2", height - margin.bottom)
-              .attr("x2", x(date));
+              .attr("x2", x(e.date));
             point
               .style("display", null)
-              .attr("cx", x(date))
-              .attr("cy", y(positive));
+              .attr("cx", x(e.date))
+              .attr("cy", y(e[dataKey]));
           }
         });
 
@@ -144,7 +148,7 @@ export const LineChart = ({ data = [], options = defaultOptions }) => {
         });
       }
     }
-  }, [data]);
+  }, [data, dataKey]);
 
   return <div ref={container} />;
 };

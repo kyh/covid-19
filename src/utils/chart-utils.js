@@ -12,14 +12,14 @@ import {
   select,
 } from "d3";
 
-export const createScales = (data, width, height, margin = {}) => {
+export const createScales = (data, dataKey, width, height, margin = {}) => {
   const x = scaleTime()
     .domain(extent(data, (d) => d.date))
     .nice()
     .rangeRound([margin.left, width - margin.right]);
 
   const y = scaleLinear()
-    .domain([0, max(data, (d) => d.positive)])
+    .domain([0, max(data, (d) => d[dataKey])])
     .nice()
     .range([height - margin.bottom, margin.top]);
 
@@ -36,17 +36,17 @@ export const createAxis = (width, x, y) => {
   return { xAxis, yAxis };
 };
 
-export const createLineFn = (x, y) => {
+export const createLineFn = (dataKey, x, y) => {
   const d3Line = line()
-    .defined((d) => !isNaN(d.positive))
+    .defined((d) => !isNaN(d[dataKey]))
     .x((d) => x(d.date))
-    .y((d) => y(d.positive));
+    .y((d) => y(d[dataKey]));
 
   const d3Area = area()
-    .defined((d) => !isNaN(d.positive))
+    .defined((d) => !isNaN(d[dataKey]))
     .x((d) => x(d.date))
     .y0(y(0))
-    .y1((d) => y(d.positive));
+    .y1((d) => y(d[dataKey]));
 
   return { line: d3Line, area: d3Area };
 };

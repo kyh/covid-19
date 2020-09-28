@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 
 import { useGetUSDailyData } from "hooks/useGetUSDailyData";
 import { useGetStatesDailyData } from "hooks/useGetStatesDailyData";
-import { useGetStatesInfo } from "hooks/useGetStatesInfo";
 
 import { PageContainer } from "components/PageContainer";
 import { Sidebar } from "features/trend/Sidebar";
@@ -16,7 +15,6 @@ export const TrendPage = () => {
     data: statesDailyData,
     states,
   } = useGetStatesDailyData();
-  const { data: statesInfo } = useGetStatesInfo();
 
   const [selectedState, setSelectedState] = useState(
     localStorage.getItem("selectedState")
@@ -62,7 +60,6 @@ export const TrendPage = () => {
       />
       <Featured
         dailyData={statesDailyData[selectedState] || usDailyData}
-        statesInfo={statesInfo}
         selectedState={selectedState}
         isLoading={isLoadingDaily}
       />

@@ -20,7 +20,7 @@ export const Sidebar = ({
           return (
             <li key={state}>
               <button
-                className={`p-4 w-full text-sm text-left focus:outline-none transition duration-200 ease-in-out ${
+                className={`p-4 w-full text-sm text-left focus:outline-none transition duration-150 ease-in-out ${
                   selectedState === state ? "bg-gray-800" : ""
                 } hover:bg-gray-800`}
                 type="button"

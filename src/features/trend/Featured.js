@@ -1,23 +1,90 @@
-import React from "react";
+import React, { useState } from "react";
 import { differenceInDays } from "date-fns";
-import ContentLoader from "react-content-loader";
 import { Card } from "components/Card";
 import { StatCard, StatRow } from "components/StatCard";
 import { LineChart } from "components/LineChart";
 import { growthRate } from "utils/stats";
+import { stateAbbrevToFullname } from "utils/map-utils";
+import { DataFilter, SELECTIONS } from "./DataFilter";
 
-export const Featured = ({
-  dailyData,
-  statesInfo,
-  selectedState,
-  isLoading,
-}) => {
-  const today = dailyData[dailyData.length - 1];
+const selectionToLabels = {
+  [SELECTIONS.time]: {
+    positiveChange: "Change in new cases",
+    positiveTotal: "Total cases today",
+    positiveTotalComparator: "Total cases yesterday",
+    positiveKey: "positive",
+    deathChange: "Change in deaths",
+    deathTotal: "Deaths today",
+    deathTotalComparator: "Deaths yesterday",
+    deathKey: "death",
+    days: 2,
+  },
+  [SELECTIONS.trendDay]: {
+    positiveChange: "1 day average change in new cases",
+    positiveTotal: "New cases today",
+    positiveTotalComparator: "New cases yesterday",
+    positiveKey: "positiveIncrease",
+    deathChange: "1 day average change in deaths",
+    deathTotal: "Deaths today",
+    deathTotalComparator: "Deaths yesterday",
+    deathKey: "deathIncrease",
+    days: 2,
+  },
+  [SELECTIONS.trendWeek]: {
+    positiveChange: "7 day average change in new cases",
+    positiveTotal: "New cases today",
+    positiveTotalComparator: "New cases 7 days ago",
+    positiveKey: "positiveIncrease",
+    deathChange: "7 day average change in deaths",
+    deathTotal: "Deaths today",
+    deathTotalComparator: "Deaths 7 days ago",
+    deathKey: "deathIncrease",
+    days: 8,
+  },
+  [SELECTIONS.trendBiWeek]: {
+    positiveChange: "14 day average change in new cases",
+    positiveTotal: "New cases today",
+    positiveTotalComparator: "New cases 14 days ago",
+    positiveKey: "positiveIncrease",
+    deathChange: "14 day average change in deaths",
+    deathTotal: "Deaths today",
+    deathTotalComparator: "Deaths 14 days ago",
+    deathKey: "deathIncrease",
+    days: 15,
+  },
+  [SELECTIONS.trendMonth]: {
+    positiveChange: "1 month average change in new cases",
+    positiveTotal: "New cases today",
+    positiveTotalComparator: "New cases 1 month ago",
+    positiveKey: "positiveIncrease",
+    deathChange: "1 month average change in deaths",
+    deathTotal: "Deaths today",
+    deathTotalComparator: "Deaths 1 month ago",
+    deathKey: "deathIncrease",
+    days: 31,
+  },
+};
+
+export const Featured = ({ dailyData, selectedState, isLoading }) => {
+  const [selectedFilter, setSelectedFilter] = useState(SELECTIONS.time);
+
+  const onSelectFilter = (selection) => {
+    setSelectedFilter(selection);
+  };
+
   const firstDay = dailyData[0];
-  const twoWeeksAgo = dailyData[dailyData.length - 13];
-  console.log(today);
+  const today = dailyData[dailyData.length - 1];
+  const label = selectionToLabels[selectedFilter];
+  const comparator = dailyData[dailyData.length - label.days];
+
   return (
     <section className="featured-content flex flex-col flex-1">
+      <div className="flex justify-between items-center mb-4">
+        <h1 className="text-lg">
+          {stateAbbrevToFullname[selectedState] || "United States"}
+        </h1>
+        <DataFilter selected={selectedFilter} onSelectFilter={onSelectFilter} />
+      </div>
       <div className="grid grid-cols-4 gap-4 mb-4">
         <StatCard
           label="Total Cases"
@@ -52,28 +119,28 @@ export const Featured = ({
       <div className="grid grid-cols-2 gap-4 mb-4">
         <Card>
           <StatRow
-            label="2 week average change in new cases"
+            label={label.positiveChange}
             value={
               today &&
               `${growthRate(
-                twoWeeksAgo.positiveIncrease,
-                today.positiveIncrease
+                comparator[label.positiveKey],
+                today[label.positiveKey]
               )}%`
             }
             isLoading={isLoading}
             lowercase
           />
           <StatRow
-            label="New daily cases today"
-            value={today && today.positiveIncrease.toLocaleString()}
+            label={label.positiveTotal}
+            value={today && today[label.positiveKey].toLocaleString()}
             isLoading={isLoading}
             lowercase
           />
           <StatRow
-            label="New daily cases 2 weeks ago"
+            label={label.positiveTotalComparator}
             value={
-              twoWeeksAgo
-                ? twoWeeksAgo.positiveIncrease.toLocaleString()
+              comparator
+                ? comparator[label.positiveKey].toLocaleString()
                 : "N/A"
             }
             isLoading={isLoading}
@@ -82,24 +149,27 @@ export const Featured = ({
         </Card>
         <Card>
           <StatRow
-            label="2 week average change in deaths"
+            label={label.deathChange}
             value={
               today &&
-              `${growthRate(twoWeeksAgo.deathIncrease, today.deathIncrease)}%`
+              `${growthRate(
+                comparator[label.deathKey],
+                today[label.deathKey]
+              )}%`
             }
             isLoading={isLoading}
             lowercase
           />
           <StatRow
-            label="New death cases today"
-            value={today && today.deathIncrease.toLocaleString()}
+            label={label.deathTotal}
+            value={today && today[label.deathKey].toLocaleString()}
             isLoading={isLoading}
             lowercase
           />
           <StatRow
-            label="New death cases 2 weeks ago"
+            label={label.deathTotalComparator}
             value={
-              twoWeeksAgo ? twoWeeksAgo.deathIncrease.toLocaleString() : "N/A"
+              comparator ? comparator[label.deathKey].toLocaleString() : "N/A"
             }
             isLoading={isLoading}
             lowercase
@@ -107,7 +177,7 @@ export const Featured = ({
         </Card>
       </div>
       <Card className="flex-1">
-        <LineChart data={dailyData} />
+        <LineChart data={dailyData} dataKey={label.positiveKey} />
       </Card>
     </section>
   );

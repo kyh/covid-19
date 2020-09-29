@@ -4,11 +4,11 @@ import { Loader } from "components/Loader";
 import { PageContainer } from "components/PageContainer";
 import { Map } from "components/Map";
 
-export const CurrentPage = () => {
+export const DistributionPage = () => {
   const { stateToData, totalPositives, isLoading } = useGetStatesData();
   return (
     <PageContainer>
-      <section>
+      <section className="w-full">
         <div className="text-xs uppercase text-gray-400 mb-1 font-semibold">
           Distribution across states
         </div>

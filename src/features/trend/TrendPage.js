@@ -5,6 +5,7 @@ import { useGetStatesDailyData } from "hooks/useGetStatesDailyData";
 
 import { PageContainer } from "components/PageContainer";
 import { Sidebar } from "features/trend/Sidebar";
+import { SELECTIONS } from "./DataFilter";
 import { Featured } from "./Featured";
 import "./TrendPage.css";
 
@@ -20,6 +21,10 @@ export const TrendPage = () => {
     localStorage.getItem("selectedState") || undefined
   );
 
+  const [selectedFilter, setSelectedFilter] = useState(
+    localStorage.getItem("selectedFilter") || SELECTIONS.time
+  );
+
   const onSelectState = (state) => {
     if (selectedState === state) {
       localStorage.removeItem("selectedState");
@@ -28,6 +33,11 @@ export const TrendPage = () => {
       localStorage.setItem("selectedState", state);
       setSelectedState(state);
     }
+  };
+
+  const onSelectFilter = (selection) => {
+    localStorage.setItem("selectedFilter", selection);
+    setSelectedFilter(selection);
   };
 
   return (
@@ -43,6 +53,8 @@ export const TrendPage = () => {
       <Featured
         dailyData={statesDailyData[selectedState] || usDailyData}
         selectedState={selectedState}
+        selectedFilter={selectedFilter}
+        onSelectFilter={onSelectFilter}
         isLoading={isLoadingDaily}
       />
     </PageContainer>

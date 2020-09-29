@@ -18,7 +18,7 @@ export const Map = ({ stateToData, totalPositives }) => {
   const container = createRef();
 
   useEffect(() => {
-    const svg = appendSvg(container.current, 960, 600);
+    const svg = appendSvg(container.current, 960, 600, "map");
     const path = geoPath();
     const x = scaleLinear().domain([0, 10]).rangeRound([650, 910]);
 
@@ -49,10 +49,10 @@ export const Map = ({ stateToData, totalPositives }) => {
       .attr("class", "caption")
       .attr("x", x.range()[0])
       .attr("y", -6)
-      .attr("fill", "#000")
+      .attr("fill", "#9fa6b2")
       .attr("text-anchor", "start")
       .attr("font-weight", "bold")
-      .text("Covid cases");
+      .text("Cases");
 
     g.call(
       axisBottom(x)

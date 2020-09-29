@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { differenceInDays } from "date-fns";
 import { Card } from "components/Card";
 import { StatCard, StatRow } from "components/StatCard";
@@ -9,55 +9,55 @@ import { DataFilter, SELECTIONS } from "./DataFilter";
 
 const selectionToLabels = {
   [SELECTIONS.time]: {
-    positiveChange: "Change in new cases",
-    positiveTotal: "Total cases today",
-    positiveTotalComparator: "Total cases yesterday",
+    positiveChange: "% increase in Total Cases",
+    positiveTotal: "Total Cases today",
+    positiveTotalComparator: "Total Cases yesterday",
     positiveKey: "positive",
-    deathChange: "Change in deaths",
+    deathChange: "% increase in Deaths",
     deathTotal: "Deaths today",
     deathTotalComparator: "Deaths yesterday",
     deathKey: "death",
     days: 2,
   },
   [SELECTIONS.trendDay]: {
-    positiveChange: "1 day average change in new cases",
-    positiveTotal: "New cases today",
-    positiveTotalComparator: "New cases yesterday",
+    positiveChange: "1 day average change in New Cases",
+    positiveTotal: "New Cases today",
+    positiveTotalComparator: "New Cases yesterday",
     positiveKey: "positiveIncrease",
-    deathChange: "1 day average change in deaths",
+    deathChange: "1 day average change in Deaths",
     deathTotal: "Deaths today",
     deathTotalComparator: "Deaths yesterday",
     deathKey: "deathIncrease",
     days: 2,
   },
   [SELECTIONS.trendWeek]: {
-    positiveChange: "7 day average change in new cases",
+    positiveChange: "7 day average change in New Cases",
     positiveTotal: "New cases today",
     positiveTotalComparator: "New cases 7 days ago",
     positiveKey: "positiveIncrease",
-    deathChange: "7 day average change in deaths",
+    deathChange: "7 day average change in Deaths",
     deathTotal: "Deaths today",
     deathTotalComparator: "Deaths 7 days ago",
     deathKey: "deathIncrease",
     days: 8,
   },
   [SELECTIONS.trendBiWeek]: {
-    positiveChange: "14 day average change in new cases",
+    positiveChange: "14 day average change in New Cases",
     positiveTotal: "New cases today",
     positiveTotalComparator: "New cases 14 days ago",
     positiveKey: "positiveIncrease",
-    deathChange: "14 day average change in deaths",
+    deathChange: "14 day average change in Deaths",
     deathTotal: "Deaths today",
     deathTotalComparator: "Deaths 14 days ago",
     deathKey: "deathIncrease",
     days: 15,
   },
   [SELECTIONS.trendMonth]: {
-    positiveChange: "1 month average change in new cases",
+    positiveChange: "1 month average change in New Cases",
     positiveTotal: "New cases today",
     positiveTotalComparator: "New cases 1 month ago",
     positiveKey: "positiveIncrease",
-    deathChange: "1 month average change in deaths",
+    deathChange: "1 month average change in Deaths",
     deathTotal: "Deaths today",
     deathTotalComparator: "Deaths 1 month ago",
     deathKey: "deathIncrease",
@@ -65,13 +65,13 @@ const selectionToLabels = {
   },
 };
 
-export const Featured = ({ dailyData, selectedState, isLoading }) => {
-  const [selectedFilter, setSelectedFilter] = useState(SELECTIONS.time);
-
-  const onSelectFilter = (selection) => {
-    setSelectedFilter(selection);
-  };
-
+export const Featured = ({
+  dailyData,
+  selectedState,
+  selectedFilter,
+  onSelectFilter,
+  isLoading,
+}) => {
   const firstDay = dailyData[0];
   const today = dailyData[dailyData.length - 1];
   const label = selectionToLabels[selectedFilter];
@@ -119,6 +119,7 @@ export const Featured = ({ dailyData, selectedState, isLoading }) => {
       <div className="sm:grid grid-cols-2 gap-4 mb-4">
         <Card>
           <StatRow
+            className="mb-1"
             label={label.positiveChange}
             value={
               today &&
@@ -131,6 +132,7 @@ export const Featured = ({ dailyData, selectedState, isLoading }) => {
             lowercase
           />
           <StatRow
+            className="mb-1"
             label={label.positiveTotal}
             value={today && today[label.positiveKey].toLocaleString()}
             isLoading={isLoading}
@@ -149,6 +151,7 @@ export const Featured = ({ dailyData, selectedState, isLoading }) => {
         </Card>
         <Card>
           <StatRow
+            className="mb-1"
             label={label.deathChange}
             value={
               today &&
@@ -161,6 +164,7 @@ export const Featured = ({ dailyData, selectedState, isLoading }) => {
             lowercase
           />
           <StatRow
+            className="mb-1"
             label={label.deathTotal}
             value={today && today[label.deathKey].toLocaleString()}
             isLoading={isLoading}

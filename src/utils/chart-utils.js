@@ -108,10 +108,10 @@ export const createTooltipEvents = (data, x, y) => {
   return { callout, onMouseEvent };
 };
 
-export const appendSvg = (container, width, height) => {
+export const appendSvg = (container, width, height, className = "") => {
   const svg = select(container)
     .append("svg")
-    .attr("class", "chart")
+    .attr("class", `chart ${className}`)
     .attr("width", width)
     .attr("height", height);
 

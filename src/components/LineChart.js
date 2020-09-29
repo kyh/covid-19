@@ -16,7 +16,7 @@ const defaultOptions = {
   margin: {
     top: 10,
     right: 30,
-    bottom: 40,
+    bottom: 50,
     left: 50,
   },
   tooltip: true,
@@ -35,10 +35,6 @@ export const LineChart = ({
     const mergedOptions = { ...defaultOptions, ...options };
     // set the dimensions and margins of the graph
     const margin = {
-      top: 20,
-      right: 0,
-      bottom: 30,
-      left: 30,
       ...mergedOptions.margin,
     };
     const width = mergedOptions.width || container.current.offsetWidth;

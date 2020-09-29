@@ -55,9 +55,15 @@ export const StatCard = ({
   );
 };
 
-export const StatRow = ({ label, value, lowercase }) => (
-  <div className="flex items-center justify-between">
+export const StatRow = ({ className, label, value, lowercase, isLoading }) => (
+  <div className={`flex items-center justify-between ${className}`}>
     <CardLabel label={label} lowercase={lowercase} />
-    <span className="text-gray-100 text-sm">{value}</span>
+    {isLoading ? (
+      <Loader width="20%" height="21">
+        <rect x="0" y="0" rx="5" ry="5" width="100%" height="100%" />
+      </Loader>
+    ) : (
+      <span className="text-gray-100 text-sm">{value}</span>
+    )}
   </div>
 );

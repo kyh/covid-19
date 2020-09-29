@@ -25,13 +25,13 @@ export const Navigation = () => {
               <div className="flex-shrink-0">
                 <img
                   className="h-8 w-8"
-                  src="https://tailwindui.com/img/logos/workflow-mark-on-dark.svg"
-                  alt="Workflow logo"
+                  src="/logo.svg"
+                  alt="Covid-19 Dashboard"
                 />
               </div>
               <div className="ml-10 flex items-baseline space-x-4">
                 <Link to="/">Trend</Link>
-                <Link to="/current">Current</Link>
+                <Link to="/distribution">Distribution</Link>
               </div>
             </div>
             <div className="ml-6 flex items-center">

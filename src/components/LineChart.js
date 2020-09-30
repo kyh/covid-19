@@ -16,7 +16,7 @@ const defaultOptions = {
   margin: {
     top: 10,
     right: 30,
-    bottom: 50,
+    bottom: 20,
     left: 50,
   },
   tooltip: true,
@@ -38,7 +38,7 @@ export const LineChart = ({
       ...mergedOptions.margin,
     };
     const width = mergedOptions.width || container.current.offsetWidth;
-    const height = mergedOptions.height || 300;
+    const height = mergedOptions.height || container.current.offsetHeight;
 
     if (data.length) {
       const { x, y } = createScales(data, dataKey, width, height, margin);
@@ -146,5 +146,5 @@ export const LineChart = ({
     }
   }, [data, dataKey]);
 
-  return <div ref={container} />;
+  return <div className="h-full" ref={container} />;
 };

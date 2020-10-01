@@ -2,6 +2,7 @@ import React from "react";
 import { stateAbbrevToFullname } from "utils/map-utils";
 import { Progress } from "components/Progress";
 import { Loader } from "components/Loader";
+import { formatNumber } from "utils/formatter";
 
 export const Sidebar = ({
   states,
@@ -43,7 +44,7 @@ export const Sidebar = ({
                   >
                     <div className="flex justify-between mb-2">
                       <span>{stateAbbrevToFullname[state]}</span>
-                      <span>{lastDay.positive.toLocaleString()}</span>
+                      <span>{formatNumber(lastDay.positive)}</span>
                     </div>
                     <Progress
                       value={lastDay.positive}

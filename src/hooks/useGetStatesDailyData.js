@@ -22,6 +22,7 @@ export const useGetStatesDailyData = () => {
   return {
     isLoading: !data.length,
     data: formatted,
+    raw: data,
     states: Object.keys(formatted).sort(),
   };
 };

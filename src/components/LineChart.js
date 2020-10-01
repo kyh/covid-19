@@ -10,6 +10,7 @@ import {
   appendDefs,
   appendTooltip,
 } from "utils/chart-utils";
+import { formatNumber } from "utils/formatter";
 import "./LineChart.css";
 
 const defaultOptions = {
@@ -123,7 +124,7 @@ export const LineChart = ({
               .attr("transform", `translate(${x(e.date)},${0})`)
               .call(
                 callout,
-                `${format(e.date, "MM/dd")} - ${e[dataKey].toLocaleString()}`
+                `${format(e.date, "MM/dd")} - ${formatNumber(e[dataKey])}`
               );
             cursorLine
               .style("display", null)

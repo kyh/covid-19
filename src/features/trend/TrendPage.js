@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-
 import { useGetUSDailyData } from "hooks/useGetUSDailyData";
 import { useGetStatesDailyData } from "hooks/useGetStatesDailyData";
-
 import { PageContainer } from "components/PageContainer";
 import { Sidebar } from "features/trend/Sidebar";
 import { SELECTIONS } from "./DataFilter";

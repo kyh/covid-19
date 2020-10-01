@@ -1,6 +1,6 @@
 import React from "react";
 import ContentLoader from "react-content-loader";
-import { numberWithCommas } from "utils/formatter";
+import { formatNumber } from "utils/formatter";
 
 export const StatTotal = ({
   data = [],
@@ -16,15 +16,15 @@ export const StatTotal = ({
       {!isLoading ? (
         <div className="flex justify-between">
           <h1 className="text-4xl font-semibold leading-none text-red-500">
-            {numberWithCommas(today.positive)}
+            {formatNumber(today.positive)}
           </h1>
           <div className="text-right">
             <p className="text-sm">
-              {numberWithCommas(today.total)}{" "}
+              {formatNumber(today.total)}{" "}
               <span className="text-gray-600">Tests Conducted</span>
             </p>
             <p className="text-sm">
-              {numberWithCommas(today.negative)}{" "}
+              {formatNumber(today.negative)}{" "}
               <span className="text-blue-600"> Tested Negative</span>
             </p>
           </div>

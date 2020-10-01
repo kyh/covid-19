@@ -5,6 +5,7 @@ import { StatCard, StatRow } from "components/StatCard";
 import { LineChart } from "components/LineChart";
 import { growthRate } from "utils/stats";
 import { stateAbbrevToFullname } from "utils/map-utils";
+import { formatNumber } from "utils/formatter";
 import { DataFilter, SELECTIONS } from "./DataFilter";
 
 const selectionToLabels = {
@@ -89,7 +90,7 @@ export const Featured = ({
         <StatCard
           label="Total Cases"
           color="teal"
-          value={today && today.positive.toLocaleString()}
+          value={today && formatNumber(today.positive)}
           isLoading={isLoading}
         />
         <StatCard
@@ -103,16 +104,14 @@ export const Featured = ({
           label="Recovered"
           color="purple"
           value={
-            today && today.recovered
-              ? today.recovered.toLocaleString()
-              : "Unknown"
+            today && today.recovered ? formatNumber(today.recovered) : "Unknown"
           }
           isLoading={isLoading}
         />
         <StatCard
           label="Deaths"
           color="pink"
-          value={today && today.death.toLocaleString()}
+          value={today && today.death ? formatNumber(today.death) : "Unknown"}
           isLoading={isLoading}
         />
       </div>
@@ -134,16 +133,14 @@ export const Featured = ({
           <StatRow
             className="mb-1"
             label={label.positiveTotal}
-            value={today && today[label.positiveKey].toLocaleString()}
+            value={today && formatNumber(today[label.positiveKey])}
             isLoading={isLoading}
             lowercase
           />
           <StatRow
             label={label.positiveTotalComparator}
             value={
-              comparator
-                ? comparator[label.positiveKey].toLocaleString()
-                : "N/A"
+              comparator ? formatNumber(comparator[label.positiveKey]) : "N/A"
             }
             isLoading={isLoading}
             lowercase
@@ -166,14 +163,14 @@ export const Featured = ({
           <StatRow
             className="mb-1"
             label={label.deathTotal}
-            value={today && today[label.deathKey].toLocaleString()}
+            value={today && formatNumber(today[label.deathKey])}
             isLoading={isLoading}
             lowercase
           />
           <StatRow
             label={label.deathTotalComparator}
             value={
-              comparator ? comparator[label.deathKey].toLocaleString() : "N/A"
+              comparator ? formatNumber(comparator[label.deathKey]) : "N/A"
             }
             isLoading={isLoading}
             lowercase

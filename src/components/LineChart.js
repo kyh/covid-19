@@ -37,8 +37,9 @@ export const LineChart = ({
     const margin = {
       ...mergedOptions.margin,
     };
-    const width = mergedOptions.width || container.current.offsetWidth;
-    const height = mergedOptions.height || container.current.offsetHeight;
+    const width = mergedOptions.width || container.current.offsetWidth || 300;
+    const height =
+      mergedOptions.height || container.current.offsetHeight || 300;
 
     if (data.length) {
       const { x, y } = createScales(data, dataKey, width, height, margin);

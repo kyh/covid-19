@@ -47,8 +47,8 @@ export const Sidebar = ({
                       <span>{formatNumber(lastDay.positive)}</span>
                     </div>
                     <Progress
-                      value={lastDay.positive}
-                      total={lastUSDay.positive}
+                      value={lastDay ? lastDay.positive : 0}
+                      total={lastUSDay ? lastUSDay.positive : 0}
                     />
                   </button>
                 </li>

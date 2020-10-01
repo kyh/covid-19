@@ -131,7 +131,7 @@ export const Map = ({
   }, []);
 
   const data = useMemo(() => {
-    if (!rawStateData || !path) return null;
+    if (!rawStateData || !rawStateData.length || !path) return null;
     const createMapFromArray = (array, keyField, valueField = null) => {
       return Object.assign(
         {},
@@ -207,7 +207,9 @@ export const Map = ({
           width={mapWidth}
           height={mapHeight}
           onMouseLeave={() => {
-            setHoveredState(null);
+            if (hoveredState) {
+              setHoveredState(null);
+            }
           }}
         >
           <>
@@ -263,7 +265,7 @@ const States = ({
       className="states"
       fill={getColorFromFeature(d)}
       stroke={strokeColor}
-      pointer-events="all"
+      pointerEvents="all"
       onMouseEnter={() => {
         setHoveredState({
           coordinates: [

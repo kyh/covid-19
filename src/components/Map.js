@@ -49,13 +49,6 @@ const colorSchemes = {
   ],
 };
 
-// should be imported from constants file
-const colors = {
-  totalTestResults: colorSchemes.gray[5],
-  positive: colorSchemes.teal[4],
-  death: colorSchemes.pink[6],
-};
-
 // static d3 setup
 const margin = {
   bottom: 10,
@@ -90,8 +83,8 @@ const colorLimits = {
   positive: [100, 250, 500, 1000, 2500, 5000, 10000],
   totalTestResults: [1000, 5000, 7500, 10000, 12500, 15000, 25000],
 };
-const strokeGrey = "#ababab";
-const strokeWhite = "#fff";
+const strokeGrey = colorSchemes.gray[6];
+const strokeWhite = colorSchemes.gray[3];
 
 const getColor = {
   death: scaleThreshold(colorLimits.death, colorSchemes.pink),
@@ -285,7 +278,7 @@ const States = ({
           d={path(hoveredState.state)}
           className="hovered-states"
           fill="transparent"
-          stroke="#000000"
+          stroke={colorSchemes.gray[4]}
           strokeWidth="2px"
         />
       )}
@@ -308,6 +301,9 @@ const Bubbles = ({ geoJson, r, getValue }) => {
     return (
       <circle
         key={property + i}
+        fill={
+          property === "positive" ? colorSchemes.teal[5] : colorSchemes.gray[5]
+        }
         {...props}
         fillOpacity={property === "positive" ? 0.8 : 0.2}
       />
@@ -340,7 +336,7 @@ const BubbleLegend = ({ r, maxValue, width, height }) => {
       cx={width / 3 + 2}
       cy={height - r(d)}
       r={r(d)}
-      stroke="#ababab"
+      stroke={colorSchemes.gray[6]}
       fill="none"
     />
   ));
@@ -351,7 +347,7 @@ const BubbleLegend = ({ r, maxValue, width, height }) => {
       y1={height - 2 * r(d)}
       x2={width - 20}
       y2={height - 2 * r(d)}
-      stroke="#ababab"
+      stroke={colorSchemes.gray[6]}
       strokeDasharray="5 5"
     />
   ));
@@ -360,7 +356,7 @@ const BubbleLegend = ({ r, maxValue, width, height }) => {
       key={`legendText${d}`}
       x={(width * 2) / 3 + 4}
       y={height - 2 * r(d) - 2}
-      fill="#ababab"
+      fill={colorSchemes.gray[4]}
       fontSize="15px"
     >
       {formatNumber(d)}
@@ -386,41 +382,40 @@ const Tooltip = ({ hoveredState, currentDate, getValue }) => {
   const death = getValue(d, "death");
   const deathNorm = getValue(d, "death", true);
   return (
-    <div className="absolute pointer-events-none" style={{ top: y, left: x }}>
-      <table>
-        <caption>
-          {d.properties.NAME}
-          <br />
-          <span className="date">{formatDate(parseDate(currentDate))}</span>
-        </caption>
+    <div
+      className="absolute pointer-events-none bg-gray-800 bg-opacity-75 rounded-md p-2 shadow-sm"
+      style={{ top: y, left: x }}
+    >
+      <table className="table-auto text-left">
         <thead>
           <tr>
-            <th scope="col">Metric</th>
-            <th scope="col">Total</th>
-            <th scope="col">Per capita*</th>
+            <th className="text-lg font-bold px-2">{d.properties.NAME}</th>
+            <th />
+            <th className="text-xs text-right align-middle px-2 font-normal">
+              ({formatDate(parseDate(currentDate))})
+            </th>
+          </tr>
+          <tr className="text-sm font-normal">
+            <th className="px-2 py-1">Metric</th>
+            <th className="px-2 py-1">Total</th>
+            <th className="px-2 py-1">Per capita*</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="text-sm font-normal">
           <tr>
-            <th scope="row">
-              <span>Tests</span>
-            </th>
-            <td>{formatNumber(totalTestResults)}</td>
-            <td>{formatNumber(totalTestResultsNorm)}</td>
+            <th className="px-2 py-1">Tests</th>
+            <td className="px-2 py-1">{formatNumber(totalTestResults)}</td>
+            <td className="px-2 py-1">{formatNumber(totalTestResultsNorm)}</td>
           </tr>
           <tr>
-            <th scope="col">
-              <span>Positive tests</span>
-            </th>
-            <td>{formatNumber(positive)}</td>
-            <td>{formatNumber(positiveNorm)}</td>
+            <th className="px-2 py-1">Positives</th>
+            <td className="px-2 py-1">{formatNumber(positive)}</td>
+            <td className="px-2 py-1">{formatNumber(positiveNorm)}</td>
           </tr>
           <tr>
-            <th scope="col">
-              <span>Deaths</span>
-            </th>
-            <td>{formatNumber(death)}</td>
-            <td>{formatNumber(deathNorm)}</td>
+            <th className="px-2 py-1">Deaths</th>
+            <td className="px-2 py-1">{formatNumber(death)}</td>
+            <td className="px-2 py-1">{formatNumber(deathNorm)}</td>
           </tr>
         </tbody>
       </table>

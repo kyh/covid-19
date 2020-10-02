@@ -1,68 +1,57 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { set } from "d3-collection";
 import { sum } from "d3-array";
-
 import { useGetStatesDailyData } from "hooks/useGetStatesDailyData";
 import { Loader } from "components/Loader";
 import { PageContainer } from "components/PageContainer";
+import { StatCard } from "components/StatCard";
 import { Map } from "components/Map";
-import { formatDate, formatNumber, parseDate } from "utils/formatter";
+import { Icon } from "components/Icon";
+import { formatDate, formatNumber } from "utils/formatter";
 
 export const DistributionPage = () => {
   const { raw, isLoading } = useGetStatesDailyData();
-
-  const dates = useMemo(() => set(raw.map((s) => s.date)).values());
   const [sliderIndex, setSliderIndex] = useState(0);
-
   const [sliderInterval, setSliderInterval] = useState(null);
-
-  // holds the date of the displayed day. calculated using the slider index
-  const currentDate = useMemo(() => dates[sliderIndex], [dates, sliderIndex]);
-
-  // holds the field we are currently viewing
-  const [currentField, setCurrentField] = useState("positive");
-
   const [playing, setPlaying] = useState(false);
-
   // the data is joined to the stateJson in the Map child component and
   // updated using setJoinedData.
   // this is because we need access to the d3 Path used for calculating
   // the centroid of each state
   const [joinedData, setJoinedData] = useState(null);
 
+  const dates = useMemo(() => set(raw.map((s) => s.date).reverse()).values(), [
+    raw,
+  ]);
+  // holds the date of the displayed day. calculated using the slider index
+  const currentDate = useMemo(() => dates[sliderIndex], [dates, sliderIndex]);
+
   const getValue = useMemo(
-    () => (d, field = currentField, normalized = false) =>
+    () => (d, field, normalized = false) =>
       ((d.properties.dailyData[currentDate] &&
         d.properties.dailyData[currentDate][field]) ||
         0) / (normalized ? d.properties.population / 1000000 : 1),
-    [currentDate, currentField]
+    [currentDate]
   );
 
   const sumTotalTestResults = useMemo(
     () =>
       joinedData &&
       sum(joinedData.features, (d) => getValue(d, "totalTestResults")),
-    [joinedData, currentDate]
+    [joinedData, getValue]
   );
 
   const sumPositive = useMemo(
     () =>
       joinedData && sum(joinedData.features, (d) => getValue(d, "positive")),
-    [joinedData, currentDate]
+    [joinedData, getValue]
   );
 
-  const start = () => {
-    if (sliderIndex === dates.length - 1) {
-      setSliderIndex(0);
-    }
-    setSliderInterval(setInterval(() => setSliderIndex((i) => i + 1), 500));
-  };
-
-  const stop = () => {
-    clearInterval(sliderInterval);
-    setPlaying(false);
-    setSliderInterval(null);
-  };
+  const sumNegative = useMemo(
+    () =>
+      joinedData && sum(joinedData.features, (d) => getValue(d, "negative")),
+    [joinedData, getValue]
+  );
 
   useEffect(() => {
     if (sliderIndex === dates.length - 1) {
@@ -78,38 +67,54 @@ export const DistributionPage = () => {
     }
   }, [playing]);
 
+  useEffect(() => {
+    if (dates.length) {
+      setSliderIndex(dates.length - 1);
+    }
+  }, [dates.length]);
+
+  const start = () => {
+    if (sliderIndex === dates.length - 1) {
+      setSliderIndex(0);
+    }
+    setSliderInterval(setInterval(() => setSliderIndex((i) => i + 1), 500));
+  };
+
+  const stop = () => {
+    clearInterval(sliderInterval);
+    setPlaying(false);
+    setSliderInterval(null);
+  };
+
   const togglePlaying = () => setPlaying((p) => !p);
 
   return (
     <PageContainer>
-      <div className="w-full">
-        <h3 className="text-xs uppercase text-gray-400 mb-1 font-semibold">
-          The Spread of COVID-19 in the US
-        </h3>
-        <div className="map-dek">
-          <h2>{formatDate(parseDate(currentDate))}</h2>
+      <div className="w-full max-w-4xl mx-auto mb-8">
+        <div className="flex justify-between mb-3 items-center">
           <div>
-            <div>
-              <span>{formatNumber(sumTotalTestResults)}</span>{" "}
-              <span>total tests</span>
-            </div>
-            <div>
-              <span>{formatNumber(sumPositive)}</span>{" "}
-              <span>positive tests</span>
-            </div>
-          </div>
-          <div className="map-time-scrubber">
-            <div className="map-start-stop-controls">
-              <div
-                className={`map-start-stop ${playing ? "stop" : "start"}`}
+            <h4 className="text-xs uppercase text-gray-400 font-semibold">
+              The Spread of COVID-19 in the US
+            </h4>
+            <h1 className="text-2xl font-bold flex items-center">
+              <button
+                className="mr-2"
                 onClick={() => togglePlaying()}
                 onKeyDown={() => togglePlaying()}
                 role="switch"
                 label={playing ? "stop" : "start"}
                 aria-checked={playing}
                 tabIndex={0}
-              />
+              >
+                <Icon icon={playing ? "pause" : "play"} />
+              </button>
+              <span>{formatDate(currentDate, "%B %d")}</span>
+            </h1>
+          </div>
+          <div>
+            <div>
               <input
+                className="w-64"
                 onChange={(event) =>
                   setSliderIndex(parseInt(event.target.value, 10))
                 }
@@ -119,13 +124,33 @@ export const DistributionPage = () => {
                 type="range"
               />
             </div>
-            <div className="map-start-stop-label">
-              <div className="column">{formatDate(parseDate(dates[0]))}</div>
-              <div className="column">
-                {formatDate(parseDate(dates[dates.length - 1]))}
-              </div>
+            <div className="flex justify-between">
+              <span className="text-xs">{formatDate(dates[0])}</span>
+              <span className="text-xs">
+                {formatDate(dates[dates.length - 1])}
+              </span>
             </div>
           </div>
+        </div>
+        <div className="sm:grid grid-cols-3 gap-4 mb-4">
+          <StatCard
+            label="Total Tests Conducted"
+            color="gray"
+            value={formatNumber(sumTotalTestResults)}
+            isLoading={isLoading}
+          />
+          <StatCard
+            label="Positive Tests"
+            color="teal"
+            value={formatNumber(sumPositive)}
+            isLoading={isLoading}
+          />
+          <StatCard
+            label="Negative Tests"
+            color="green"
+            value={formatNumber(sumNegative)}
+            isLoading={isLoading}
+          />
         </div>
         {isLoading ? (
           <Loader width="100%" height="600">
@@ -137,7 +162,7 @@ export const DistributionPage = () => {
             setJoinedData={setJoinedData}
             getValue={getValue}
             currentDate={currentDate}
-            currentField={currentField}
+            currentField="positive"
             useChoropleth={false}
           />
         )}

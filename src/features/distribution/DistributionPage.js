@@ -9,6 +9,8 @@ import { Map } from "components/Map";
 import { Icon } from "components/Icon";
 import { formatDate, formatNumber } from "utils/formatter";
 
+const US_POPULATION = 330376491;
+
 export const DistributionPage = () => {
   const { raw, isLoading } = useGetStatesDailyData();
   const [sliderIndex, setSliderIndex] = useState(0);
@@ -151,18 +153,27 @@ export const DistributionPage = () => {
             label="Total Tests Conducted"
             color="gray"
             value={formatNumber(sumTotalTestResults)}
+            suffix={`(${((sumTotalTestResults / US_POPULATION) * 100).toFixed(
+              2
+            )}% of US population)`}
             isLoading={isLoading}
           />
           <StatCard
             label="Positive Tests"
             color="teal"
             value={formatNumber(sumPositive)}
+            suffix={`(${((sumPositive / sumTotalTestResults) * 100).toFixed(
+              2
+            )}% of tests)`}
             isLoading={isLoading}
           />
           <StatCard
             label="Negative Tests"
             color="green"
             value={formatNumber(sumNegative)}
+            suffix={`(${((sumNegative / sumTotalTestResults) * 100).toFixed(
+              2
+            )}% of tests)`}
             isLoading={isLoading}
           />
         </div>

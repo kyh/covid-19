@@ -101,7 +101,7 @@ const getStrokeColor = {
   totalTestResults: strokeGrey,
 };
 
-const mapWidth = 910;
+const mapWidth = window.innerWidth < 910 ? window.innerWidth - 30 : 910;
 const mapHeight = 520;
 
 export const Map = ({
@@ -195,7 +195,7 @@ export const Map = ({
         )}
       </div>
 
-      <div className="map-contents mb-4">
+      <div className="mb-4">
         <svg
           width={mapWidth}
           height={mapHeight}

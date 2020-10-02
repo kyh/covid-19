@@ -90,8 +90,8 @@ export const DistributionPage = () => {
 
   return (
     <PageContainer>
-      <div className="w-full max-w-4xl mx-auto mb-8">
-        <div className="flex justify-between mb-3 items-center">
+      <div className="w-full max-w-4xl mx-auto mb-8 px-4">
+        <div className="sm:flex justify-between mb-3 items-center">
           <div>
             <h4 className="text-xs uppercase text-gray-400 font-semibold">
               The Spread of COVID-19 in the US

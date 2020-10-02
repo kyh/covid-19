@@ -195,7 +195,7 @@ export const Map = ({
         )}
       </div>
 
-      <div className="map-contents">
+      <div className="map-contents mb-4">
         <svg
           width={mapWidth}
           height={mapHeight}
@@ -228,6 +228,7 @@ export const Map = ({
           />
         )}
       </div>
+      <span className="text-xs text-gray-500">* Per one million people</span>
     </div>
   );
 };

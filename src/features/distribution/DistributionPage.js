@@ -77,7 +77,7 @@ export const DistributionPage = () => {
     if (sliderIndex === dates.length - 1) {
       setSliderIndex(0);
     }
-    setSliderInterval(setInterval(() => setSliderIndex((i) => i + 1), 500));
+    setSliderInterval(setInterval(() => setSliderIndex((i) => i + 1), 300));
   };
 
   const stop = () => {
@@ -108,7 +108,13 @@ export const DistributionPage = () => {
               >
                 <Icon icon={playing ? "pause" : "play"} />
               </button>
-              <span>{formatDate(currentDate, "%B %d")}</span>
+              {isLoading ? (
+                <Loader width="100%" height="36">
+                  <rect x="0" y="0" rx="4" ry="4" width="100%" height="100%" />
+                </Loader>
+              ) : (
+                <span>{formatDate(currentDate, "%B %d")}</span>
+              )}
             </h1>
           </div>
           <div>
@@ -125,10 +131,18 @@ export const DistributionPage = () => {
               />
             </div>
             <div className="flex justify-between">
-              <span className="text-xs">{formatDate(dates[0])}</span>
-              <span className="text-xs">
-                {formatDate(dates[dates.length - 1])}
-              </span>
+              {isLoading ? (
+                <Loader width="250" height="18">
+                  <rect x="0" y="0" rx="4" ry="4" width="100%" height="100%" />
+                </Loader>
+              ) : (
+                <>
+                  <span className="text-xs">{formatDate(dates[0])}</span>
+                  <span className="text-xs">
+                    {formatDate(dates[dates.length - 1])}
+                  </span>
+                </>
+              )}
             </div>
           </div>
         </div>

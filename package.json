@@ -48,6 +48,6 @@
     "@testing-library/react": "^11.0.4",
     "@testing-library/user-event": "^12.1.7",
     "prettier": "^2.1.2",
-    "tailwindcss": "^1.8.12"
+    "tailwindcss": "^1.9.1"
   }
 }

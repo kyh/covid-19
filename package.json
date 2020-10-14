@@ -2,6 +2,32 @@
   "name": "covid-19-dashboard",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "build": "npm run build:css && npm run build:js",
+    "build:css": "npx tailwindcss build src/css/tailwind.src.css -o src/tailwind.css",
+    "build:js": "react-scripts build",
+    "dev": "npm start",
+    "eject": "react-scripts eject",
+    "format": "prettier . --write",
+    "start": "npm run build:css && npm run start:js",
+    "start:js": "react-scripts start",
+    "test": "react-scripts test"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
   "dependencies": {
     "@tailwindui/react": "^0.1.1",
     "d3": "^6.2.0",
@@ -15,32 +41,6 @@
     "react-scripts": "^3.4.3",
     "swr": "^0.3.5",
     "topojson": "^3.0.2"
-  },
-  "scripts": {
-    "start": "npm run build:css && npm run start:js",
-    "dev": "npm start",
-    "build": "npm run build:css && npm run build:js",
-    "start:js": "react-scripts start",
-    "build:js": "react-scripts build",
-    "build:css": "npx tailwindcss build src/css/tailwind.src.css -o src/tailwind.css",
-    "format": "prettier . --write",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
   },
   "devDependencies": {
     "@tailwindcss/ui": "^0.6.2",

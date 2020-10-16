@@ -34,9 +34,9 @@
     "d3-collection": "^1.0.7",
     "d3-scale-chromatic": "^2.0.0",
     "date-fns": "^2.16.1",
-    "react": "^16.13.1",
+    "react": "^16.14.0",
     "react-content-loader": "^5.1.2",
-    "react-dom": "^16.13.1",
+    "react-dom": "^16.14.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.3",
     "swr": "^0.3.5",
@@ -45,9 +45,9 @@
   "devDependencies": {
     "@tailwindcss/ui": "^0.6.2",
     "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.0.4",
-    "@testing-library/user-event": "^12.1.7",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.8",
     "prettier": "^2.1.2",
-    "tailwindcss": "^1.9.1"
+    "tailwindcss": "^1.9.2"
   }
 }

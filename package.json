@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "npm run build:css && npm run build:js",
+    "build": "NODE_ENV=production npm run build:css && npm run build:js",
     "build:css": "npx tailwindcss build src/css/tailwind.src.css -o src/tailwind.css",
     "build:js": "react-scripts build",
     "dev": "npm start",

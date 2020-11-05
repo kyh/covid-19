@@ -2,13 +2,17 @@ import React from "react";
 import { Card } from "components/Card";
 import { Loader } from "components/Loader";
 
-const Point = ({ label = "", color = "green" }) => {
+const Point = ({
+  label = "",
+  pointClassname = "",
+  pointShadeClassname = "",
+}) => {
   return (
     <span
       aria-label={label}
-      className={`h-4 w-4 bg-${color}-800 rounded-full flex items-center justify-center bg-opacity-50 mr-2`}
+      className={`${pointShadeClassname} h-4 w-4 rounded-full flex items-center justify-center bg-opacity-50 mr-2`}
     >
-      <span className={`h-2 w-2 bg-${color}-500 rounded-full`} />
+      <span className={`${pointClassname} h-2 w-2 rounded-full`} />
     </span>
   );
 };
@@ -24,7 +28,8 @@ export const CardLabel = ({ label, lowercase }) => (
 );
 
 export const StatCard = ({
-  color,
+  pointClassname,
+  pointShadeClassname,
   label,
   value,
   suffix,
@@ -34,7 +39,11 @@ export const StatCard = ({
   return (
     <Card className={className}>
       <div className="flex items-center">
-        <Point label={label} color={color} />
+        <Point
+          label={label}
+          pointClassname={pointClassname}
+          pointShadeClassname={pointShadeClassname}
+        />
         <CardLabel label={label} />
       </div>
       <div className="flex pl-6 items-baseline">

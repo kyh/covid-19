@@ -151,7 +151,8 @@ export const DistributionPage = () => {
         <div className="sm:grid grid-cols-3 gap-4 mb-4">
           <StatCard
             label="Total Tests Conducted"
-            color="gray"
+            pointClassname="bg-gray-500"
+            pointShadeClassname="bg-gray-800"
             value={formatNumber(sumTotalTestResults)}
             suffix={`(${((sumTotalTestResults / US_POPULATION) * 100).toFixed(
               2
@@ -160,7 +161,8 @@ export const DistributionPage = () => {
           />
           <StatCard
             label="Positive Tests"
-            color="teal"
+            pointClassname="bg-teal-500"
+            pointShadeClassname="bg-teal-800"
             value={formatNumber(sumPositive)}
             suffix={`(${((sumPositive / sumTotalTestResults) * 100).toFixed(
               2
@@ -169,7 +171,8 @@ export const DistributionPage = () => {
           />
           <StatCard
             label="Negative Tests"
-            color="green"
+            pointClassname="bg-green-500"
+            pointShadeClassname="bg-green-800"
             value={formatNumber(sumNegative)}
             suffix={`(${((sumNegative / sumTotalTestResults) * 100).toFixed(
               2

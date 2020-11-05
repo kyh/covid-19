@@ -89,20 +89,23 @@ export const Featured = ({
       <div className="sm:grid grid-cols-4 gap-4 mb-4">
         <StatCard
           label="Total Cases"
-          color="teal"
+          pointClassname="bg-teal-500"
+          pointShadeClassname="bg-teal-800"
           value={today && formatNumber(today.positive)}
           isLoading={isLoading}
         />
         <StatCard
           label="First Case"
-          color="yellow"
+          pointClassname="bg-yellow-500"
+          pointShadeClassname="bg-yellow-800"
           value={differenceInDays(new Date(), firstDay && firstDay.date)}
           suffix="days ago"
           isLoading={isLoading}
         />
         <StatCard
           label="Recovered"
-          color="purple"
+          pointClassname="bg-purple-500"
+          pointShadeClassname="bg-purple-800"
           value={
             today && today.recovered ? formatNumber(today.recovered) : "Unknown"
           }
@@ -110,7 +113,8 @@ export const Featured = ({
         />
         <StatCard
           label="Deaths"
-          color="pink"
+          pointClassname="bg-pink-500"
+          pointShadeClassname="bg-pink-800"
           value={today && today.death ? formatNumber(today.death) : "Unknown"}
           isLoading={isLoading}
         />

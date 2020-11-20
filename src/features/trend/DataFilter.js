@@ -13,7 +13,7 @@ export const DataFilter = ({ selected, onSelectFilter }) => {
     <span className="relative z-0 inline-flex shadow-sm rounded-md">
       <button
         type="button"
-        className={`relative inline-flex items-center px-4 py-2 rounded-l-md border border-gray-400 text-xs font-medium focus:outline-none hover:bg-gray-800 transition ease-in-out duration-150 whitespace-no-wrap ${
+        className={`relative inline-flex items-center px-3 py-1 rounded-l-md border border-gray-400 text-xs font-medium focus:outline-none hover:bg-gray-800 transition ease-in-out duration-150 whitespace-no-wrap ${
           selected === SELECTIONS.time ? "bg-gray-800" : "bg-gray-900"
         }`}
         onClick={() => onSelectFilter(SELECTIONS.time)}
@@ -21,7 +21,7 @@ export const DataFilter = ({ selected, onSelectFilter }) => {
         Cases over time
       </button>
       <select
-        className={`-ml-px block form-select w-full px-4 py-2 rounded-l-none rounded-r-md border border-gray-400 text-xs font-medium focus:outline-none hover:bg-gray-800 transition ease-in-out duration-150 whitespace-no-wrap ${
+        className={`-ml-px block form-select px-3 py-1 rounded-l-none rounded-r-md border border-gray-400 text-xs font-medium focus:outline-none hover:bg-gray-800 transition ease-in-out duration-150 whitespace-no-wrap ${
           selected !== SELECTIONS.time ? "bg-gray-800" : "bg-gray-900"
         }`}
         value={selected}

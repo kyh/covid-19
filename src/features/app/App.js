@@ -13,7 +13,7 @@ const App = () => {
     <BrowserRouter>
       <SWRConfig
         value={{
-          refreshInterval: 3000,
+          refreshInterval: 300000, // 5 mins
           fetcher: (...args) => fetch(...args).then((res) => res.json()),
         }}
       >

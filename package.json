@@ -43,7 +43,7 @@
     "react-content-loader": "^5.1.4",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
-    "swr": "^0.3.9",
+    "swr": "^0.3.11",
     "topojson": "^3.0.2"
   },
   "devDependencies": {
@@ -52,7 +52,7 @@
     "@tailwindcss/typography": "^0.3.1",
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.2",
-    "@testing-library/user-event": "^12.5.0",
+    "@testing-library/user-event": "^12.6.0",
     "autoprefixer": "^10.1.0",
     "husky": "^4.3.6",
     "postcss": "^8.2.1",

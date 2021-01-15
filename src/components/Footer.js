@@ -8,7 +8,7 @@ export const Footer = () => {
         <div>
           <a
             className="hover:text-gray-100"
-            href="https://github.com/tehkaiyu/covid-19"
+            href="https://github.com/kyh/covid-19"
           >
             Github
           </a>

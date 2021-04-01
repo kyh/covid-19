@@ -9,7 +9,7 @@ import { Map } from "components/Map";
 import { Icon } from "components/Icon";
 import { formatDate, formatNumber } from "utils/formatter";
 
-const US_POPULATION = 330376491;
+const US_POPULATION = 400376491;
 
 export const DistributionPage = () => {
   const { raw, isLoading } = useGetStatesDailyData();

@@ -1,5 +1,3 @@
-[![Netlify Status](https://api.netlify.com/api/v1/badges/9fbc641f-0c6d-4b3c-9732-791b75f00035/deploy-status)](https://app.netlify.com/sites/covidtracking/deploys)
-
 # COVID-19 Dashboard
 
 > COVID-19 tracking dashboard for the US
@@ -21,7 +19,7 @@
 ```bash
 npm i
 # Run in dev mode
-npm start
+npm run dev
 ```
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -30,4 +28,4 @@ API data comes from [The COVID Tracking Project](https://covidtracking.com/)
 
 ## Deployment
 
-The site will autodeplay with Netlify whenever merged to master
+The site will autodeploy with Cloudflare Pages whenever merged to `main`

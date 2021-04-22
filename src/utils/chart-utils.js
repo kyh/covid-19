@@ -36,18 +36,17 @@ export const createAxis = (width, x, y) => {
   return { xAxis, yAxis };
 };
 
+const isDefined = (d, dataKey) =>
+  d[dataKey] && d.date && !isNaN(d[dataKey]) && !isNaN(d.date);
+
 export const createLineFn = (dataKey, x, y) => {
   const d3Line = line()
-    .defined(
-      (d) => d[dataKey] && d.date && !isNaN(d[dataKey]) && !isNaN(d.date)
-    )
+    .defined((d) => isDefined(d, dataKey))
     .x((d) => x(d.date))
     .y((d) => y(d[dataKey]));
 
   const d3Area = area()
-    .defined(
-      (d) => d[dataKey] && d.date && !isNaN(d[dataKey]) && !isNaN(d.date)
-    )
+    .defined((d) => isDefined(d, dataKey))
     .x((d) => x(d.date))
     .y0(y(0))
     .y1((d) => y(d[dataKey]));

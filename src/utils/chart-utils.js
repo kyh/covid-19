@@ -38,12 +38,16 @@ export const createAxis = (width, x, y) => {
 
 export const createLineFn = (dataKey, x, y) => {
   const d3Line = line()
-    .defined((d) => !isNaN(d[dataKey]))
+    .defined(
+      (d) => d[dataKey] && d.date && !isNaN(d[dataKey]) && !isNaN(d.date)
+    )
     .x((d) => x(d.date))
     .y((d) => y(d[dataKey]));
 
   const d3Area = area()
-    .defined((d) => !isNaN(d[dataKey]))
+    .defined(
+      (d) => d[dataKey] && d.date && !isNaN(d[dataKey]) && !isNaN(d.date)
+    )
     .x((d) => x(d.date))
     .y0(y(0))
     .y1((d) => y(d[dataKey]));

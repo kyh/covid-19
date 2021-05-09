@@ -2,7 +2,9 @@ import useSWR from "swr";
 import { formatDaily } from "utils/formatter";
 
 export const useGetStatesDailyData = () => {
-  const { data = [] } = useSWR("/data/states.json");
+  const { data = [] } = useSWR(
+    "https://github.com/kyh/covid-19/blob/c1f39d90340bbb966f1380bfb79a7a95564bcf30/data/states.json"
+  );
 
   let formatted = {};
   if (Array.isArray(data)) {

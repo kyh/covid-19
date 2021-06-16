@@ -31,9 +31,9 @@
   },
   "dependencies": {
     "@tailwindui/react": "^0.1.1",
-    "d3": "^6.5.0",
+    "d3": "^7.0.0",
     "d3-collection": "^1.0.7",
-    "d3-scale-chromatic": "^2.0.0",
+    "d3-scale-chromatic": "^3.0.0",
     "date-fns": "^2.16.1",
     "react": "^17.0.1",
     "react-content-loader": "^6.0.1",

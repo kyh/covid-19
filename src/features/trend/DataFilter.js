@@ -1,5 +1,3 @@
-import React from "react";
-
 export const SELECTIONS = {
   time: "time",
   trendDay: "trendDay",

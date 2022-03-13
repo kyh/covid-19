@@ -1,4 +1,3 @@
-import React from "react";
 import { differenceInDays } from "date-fns";
 import { Card } from "components/Card";
 import { StatCard, StatRow } from "components/StatCard";

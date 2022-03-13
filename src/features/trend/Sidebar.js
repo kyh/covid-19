@@ -1,4 +1,3 @@
-import React from "react";
 import { stateAbbrevToFullname } from "utils/map-utils";
 import { Progress } from "components/Progress";
 import { Loader } from "components/Loader";

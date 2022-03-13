@@ -1,5 +1,4 @@
-import React from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { SWRConfig } from "swr";
 import { Navigation } from "components/Navigation";
 import { Footer } from "components/Footer";
@@ -22,20 +21,12 @@ const App = () => {
           style={{ gridTemplateRows: "auto 1fr auto" }}
         >
           <Navigation />
-          <Switch>
-            <Route exact path="/">
-              <TrendPage />
-            </Route>
-            <Route path="/distribution">
-              <DistributionPage />
-            </Route>
-            <Route path="/compare">
-              <ComparePage />
-            </Route>
-            <Route path="/about">
-              <AboutPage />
-            </Route>
-          </Switch>
+          <Routes>
+            <Route path="/" element={<TrendPage />} />
+            <Route path="/distribution" element={<DistributionPage />} />
+            <Route path="/compare" element={<ComparePage />} />
+            <Route path="/about" element={<AboutPage />} />
+          </Routes>
           <Footer />
         </section>
       </SWRConfig>

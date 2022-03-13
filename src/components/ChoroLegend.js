@@ -1,5 +1,3 @@
-import React from "react";
-
 import { format } from "d3-format";
 import { scaleLinear } from "d3-scale";
 

@@ -1,5 +1,3 @@
-import React from "react";
-
 export const Progress = ({ value, total }) => {
   return (
     <div className="overflow-hidden h-2 flex rounded bg-gray-700">

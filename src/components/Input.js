@@ -1,5 +1,3 @@
-import React from "react";
-
 export const Input = ({ label, ...rest }) => {
   return (
     <div>

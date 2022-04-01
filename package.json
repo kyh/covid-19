@@ -1,15 +1,10 @@
 {
   "name": "covid-19-dashboard",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "private": true,
   "scripts": {
-    "build": "NODE_ENV=production npm run build:css && npm run build:js",
-    "build:css": "npx tailwindcss build src/css/tailwind.src.css -o src/tailwind.css",
-    "build:js": "react-scripts build",
-    "dev": "npm start",
-    "eject": "react-scripts eject",
-    "format": "prettier . --write",
-    "start": "npm run build:css && react-scripts start",
+    "build": "react-scripts build",
+    "dev": "react-scripts start",
     "test": "react-scripts test",
     "postinstall": "husky install"
   },
@@ -29,25 +24,24 @@
     "extends": "react-app"
   },
   "dependencies": {
-    "@tailwindui/react": "^0.1.1",
-    "d3": "^7.0.0",
+    "d3": "^7.4.0",
     "d3-collection": "^1.0.7",
     "d3-scale-chromatic": "^3.0.0",
     "date-fns": "^2.16.1",
-    "react": "^17.0.1",
+    "react": "^18.0.0",
     "react-content-loader": "^6.0.1",
-    "react-dom": "^17.0.1",
-    "react-router-dom": "^6.2.2",
+    "react-dom": "^18.0.0",
+    "react-router-dom": "^6.3.0",
     "swr": "^1.2.2"
   },
   "devDependencies": {
     "@tailwindcss/aspect-ratio": "^0.4.0",
     "@tailwindcss/forms": "^0.5.0",
     "@tailwindcss/typography": "^0.5.2",
-    "autoprefixer": "^10.2.4",
+    "autoprefixer": "^10.4.4",
     "husky": "^7.0.1",
-    "postcss": "^8.3.5",
-    "prettier": "^2.3.2",
+    "postcss": "^8.4.12",
+    "prettier": "^2.6.1",
     "pretty-quick": "^3.1.1",
     "react-scripts": "^5.0.0",
     "tailwindcss": "^3.0.23"

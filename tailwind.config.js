@@ -1,7 +1,7 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
-  purge: ["./src/**/*.html", "./src/**/*.js"],
+  content: ["./src/**/*.html", "./src/**/*.js"],
   theme: {
     colors: {
       current: "currentColor",

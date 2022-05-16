@@ -1,5 +1,7 @@
 # COVID-19 Dashboard
 
+[🚀 Live Site](https://covid-19.kyh.io)
+
 > COVID-19 tracking dashboard for the US
 
 ![alt text](https://cdn.dribbble.com/users/237579/screenshots/14289162/media/3e5848d894c24e98a9e07d956a616a2d.png?resize=800x600)

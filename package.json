@@ -3,9 +3,10 @@
   "version": "0.6.0",
   "private": true,
   "scripts": {
-    "build": "react-scripts build",
-    "dev": "react-scripts start",
-    "test": "react-scripts test",
+    "build": "vite build",
+    "dev": "vite",
+    "preview": "vite preview",
+    "test": "vitest --run --passWithNoTests",
     "postinstall": "husky install"
   },
   "browserslist": {
@@ -19,9 +20,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "eslintConfig": {
-    "extends": "react-app"
   },
   "dependencies": {
     "d3": "^7.4.0",
@@ -38,12 +36,16 @@
     "@tailwindcss/aspect-ratio": "^0.4.0",
     "@tailwindcss/forms": "^0.5.0",
     "@tailwindcss/typography": "^0.5.2",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@vitejs/plugin-react": "^4.0.0",
     "autoprefixer": "^10.4.4",
     "husky": "^7.0.1",
+    "jsdom": "^22.1.0",
     "postcss": "^8.4.12",
     "prettier": "^2.6.1",
     "pretty-quick": "^3.1.1",
-    "react-scripts": "^5.0.0",
-    "tailwindcss": "^3.0.23"
+    "tailwindcss": "^3.0.23",
+    "vite": "^4.4.9",
+    "vitest": "^0.34.6"
   }
 }

@@ -15,7 +15,7 @@
 │   ├── /features                # App routes and feature specific code
 │   ├── /hooks                   # React hooks
 │   └── /utils                   # Client side helper functions/Utilities/Services
-└── /public                      # Static assets
+└── /public                      # Static assets served as-is by Vite
 ```
 
 ## Setting up
@@ -24,9 +24,11 @@
 npm i
 # Run in dev mode
 npm run dev
+# Create a production build
+npm run build
 ```
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is built with [Vite](https://vitejs.dev/) and [React](https://react.dev/).
 
 API data comes from [The COVID Tracking Project](https://covidtracking.com/)
 

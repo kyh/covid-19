@@ -22,17 +22,19 @@ export const DistributionPage = () => {
   // the centroid of each state
   const [joinedData, setJoinedData] = useState(null);
 
-  const dates = useMemo(() => set(raw.map((s) => s.date).reverse()).values(), [
-    raw,
-  ]);
+  const dates = useMemo(
+    () => set(raw.map((s) => s.date).reverse()).values(),
+    [raw]
+  );
   // holds the date of the displayed day. calculated using the slider index
   const currentDate = useMemo(() => dates[sliderIndex], [dates, sliderIndex]);
 
   const getValue = useMemo(
-    () => (d, field, normalized = false) =>
-      ((d.properties.dailyData[currentDate] &&
-        d.properties.dailyData[currentDate][field]) ||
-        0) / (normalized ? d.properties.population / 1000000 : 1),
+    () =>
+      (d, field, normalized = false) =>
+        ((d.properties.dailyData[currentDate] &&
+          d.properties.dailyData[currentDate][field]) ||
+          0) / (normalized ? d.properties.population / 1000000 : 1),
     [currentDate]
   );
 

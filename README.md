@@ -1,3 +1,5 @@
+> Moved to [kyh monorepo](https://github.com/kyh/kyh.io)
+
 # COVID-19 Dashboard
 
 [🚀 Live Site](https://covid-19.kyh.io)
